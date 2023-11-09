@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cug16bnc880xh"]
+[gd_scene load_steps=3 format=3 uid="uid://cug16bnc880xh"]
 
 [ext_resource type="ArrayMesh" uid="uid://bwiot0bkaq4lr" path="res://models/3D/test_floor.obj" id="1_xq4be"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_w5g8d"]
+height = 4.0
 
 [node name="TestLevel" type="Node3D"]
 
@@ -15,8 +18,10 @@ mesh = ExtResource("1_xq4be")
 skeleton = NodePath("../..")
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.726208, 3.38812, -1.5384)
 
 [node name="Pivot" type="Node3D" parent="Player"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.751999, 2.89607, 0.0277891)
+shape = SubResource("CylinderShape3D_w5g8d")
