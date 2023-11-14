@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cug16bnc880xh"]
+[gd_scene load_steps=6 format=3 uid="uid://cug16bnc880xh"]
 
 [ext_resource type="ArrayMesh" uid="uid://bwiot0bkaq4lr" path="res://models/3D/test_floor.obj" id="1_xq4be"]
 [ext_resource type="Script" path="res://scenes/Player.cs" id="2_igdkq"]
 [ext_resource type="Texture2D" uid="uid://d2m0lh3pudv47" path="res://sprites/player_character/temp_player.png" id="3_ogjna"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5dq7a"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_w5g8d"]
 height = 4.0
@@ -12,15 +14,20 @@ height = 4.0
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 2, 0)
 polygon = PackedVector2Array(0, 0)
+margin = 0.001
 
 [node name="TestFloor" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -5.88991)
 mesh = ExtResource("1_xq4be")
 skeleton = NodePath("../..")
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(20, 0, 0, 0, 2, 0, 0, 0, 20, 0, 0, 0)
+shape = SubResource("BoxShape3D_5dq7a")
+
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.135257, 1.07783, -1.5384)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.135257, 2.07783, 0.4616)
 up_direction = Vector3(0.179587, 0.897934, 0.401825)
 slide_on_ceiling = false
 script = ExtResource("2_igdkq")

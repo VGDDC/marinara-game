@@ -14,9 +14,9 @@ public partial class Player : CharacterBody3D
 		Vector3 velocity = Velocity;
 
 		// Add the gravity.
-		/*if (!IsOnFloor()) {
-			velocity.Y -= gravity * (float)delta;
-		}*/
+		if (!IsOnFloor()) {
+			//velocity.Y -= gravity * (float)delta;
+		}
 
 		// Handle Jump.
 		/*if (Input.IsActionJustPressed("ui_accept") && IsOnFloor()) {
