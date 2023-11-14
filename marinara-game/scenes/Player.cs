@@ -14,12 +14,14 @@ public partial class Player : CharacterBody3D
 		Vector3 velocity = Velocity;
 
 		// Add the gravity.
-		if (!IsOnFloor())
+		/*if (!IsOnFloor()) {
 			velocity.Y -= gravity * (float)delta;
+		}*/
 
 		// Handle Jump.
-		/*if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
-			velocity.Y = JumpVelocity;*/
+		/*if (Input.IsActionJustPressed("ui_accept") && IsOnFloor()) {
+			velocity.Y = JumpVelocity;
+		}*/
 
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
