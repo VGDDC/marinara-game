@@ -15,7 +15,7 @@ public partial class Player : CharacterBody3D
 
 		// Add the gravity.
 		if (!IsOnFloor()) {
-			//velocity.Y -= gravity * (float)delta;
+			velocity.Y -= gravity * (float)delta;
 		}
 
 		// Handle Jump.
