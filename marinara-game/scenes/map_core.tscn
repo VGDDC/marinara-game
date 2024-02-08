@@ -12,13 +12,13 @@ height = 4.0
 
 [node name="TestLevel" type="Node3D"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="Ground" type="StaticBody3D" parent="."]
 
-[node name="TestFloor" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="TestFloor" type="MeshInstance3D" parent="Ground"]
 mesh = ExtResource("1_xq4be")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 transform = Transform3D(20, 0, 0, 0, 2, 0, 0, 0, 20, 0, 0, 0)
 shape = SubResource("BoxShape3D_5dq7a")
 
@@ -43,3 +43,6 @@ texture = ExtResource("3_ogjna")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.392626, 2.53083, 5.51121)
 script = ExtResource("4_ljoms")
 targetNode = NodePath("../Player")
+
+[node name="Left Wall WIP" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.29104, 0)
