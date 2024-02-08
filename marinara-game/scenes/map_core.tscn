@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cug16bnc880xh"]
+[gd_scene load_steps=8 format=3 uid="uid://cug16bnc880xh"]
 
 [ext_resource type="ArrayMesh" uid="uid://bwiot0bkaq4lr" path="res://models/3D/test_floor.obj" id="1_xq4be"]
 [ext_resource type="Script" path="res://scenes/Player.cs" id="2_igdkq"]
 [ext_resource type="Texture2D" uid="uid://d2m0lh3pudv47" path="res://sprites/player_character/temp_player.png" id="3_ogjna"]
+[ext_resource type="Texture2D" uid="uid://403hwlngvsuj" path="res://sprites/player_character/temp_weapon.png" id="4_82glr"]
 [ext_resource type="Script" path="res://scenes/CameraMove.cs" id="4_ljoms"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5dq7a"]
@@ -30,16 +31,23 @@ script = ExtResource("2_igdkq")
 [node name="Pivot" type="Node3D" parent="Player"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 0.4, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.4, 0, 0, -7.45058e-09, 1, 0, 0, 0)
 shape = SubResource("CylinderShape3D_w5g8d")
 
 [node name="Sprite3D" type="Sprite3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.145988, 0.022527, -0.00449783)
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0.145988, 0.022527, -0.00449783)
 pixel_size = 0.02
 texture_filter = 0
 texture = ExtResource("3_ogjna")
 
+[node name="Weapon" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.464286, 0.149766, 0.0502974)
+
+[node name="Sprite3D" type="Sprite3D" parent="Player/Weapon"]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0, 0)
+texture = ExtResource("4_82glr")
+
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("targetNode")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.392626, 2.53083, 5.51121)
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, -0.392626, 2.53083, 5.51121)
 script = ExtResource("4_ljoms")
 targetNode = NodePath("../Player")
