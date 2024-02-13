@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-[gd_scene load_steps=8 format=3 uid="uid://cug16bnc880xh"]
-=======
 [gd_scene load_steps=9 format=3 uid="uid://cug16bnc880xh"]
->>>>>>> Stashed changes
 
 [ext_resource type="ArrayMesh" uid="uid://bwiot0bkaq4lr" path="res://models/3D/test_floor.obj" id="1_xq4be"]
 [ext_resource type="Script" path="res://scenes/Player.cs" id="2_igdkq"]
@@ -56,15 +52,13 @@ transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0,
 texture = ExtResource("4_82glr")
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("targetNode")]
-<<<<<<< Updated upstream
 transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, -0.392626, 2.53083, 5.51121)
 script = ExtResource("4_ljoms")
 targetNode = NodePath("../Player")
 
 [node name="Left Wall WIP" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.29104, 0)
-=======
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.392666, 2.53059, 5.51127)
+//transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.392666, 2.53059, 5.51127)
 script = ExtResource("4_ljoms")
 targetNode = NodePath("../Player")
 
@@ -79,4 +73,3 @@ texture = ExtResource("5_prm6p")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy"]
 transform = Transform3D(1, 0, 0, 0, 0.4, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("CylinderShape3D_6w7dy")
->>>>>>> Stashed changes
