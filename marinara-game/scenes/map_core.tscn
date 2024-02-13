@@ -32,7 +32,6 @@ transform = Transform3D(20, 0, 0, 0, 2, 0, 0, 0, 20, 0, 0, 0)
 shape = SubResource("BoxShape3D_5dq7a")
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.135, 2, 0.462)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 slide_on_ceiling = false
 script = ExtResource("2_igdkq")
