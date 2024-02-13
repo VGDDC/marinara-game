@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cug16bnc880xh"]
+[gd_scene load_steps=10 format=3 uid="uid://cug16bnc880xh"]
 
 [ext_resource type="ArrayMesh" uid="uid://bwiot0bkaq4lr" path="res://models/3D/test_floor.obj" id="1_xq4be"]
 [ext_resource type="Script" path="res://scenes/Player.cs" id="2_igdkq"]
@@ -58,9 +58,6 @@ targetNode = NodePath("../Player")
 
 [node name="Left Wall WIP" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.29104, 0)
-//transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.392666, 2.53059, 5.51127)
-script = ExtResource("4_ljoms")
-targetNode = NodePath("../Player")
 
 [node name="Enemy" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.52201, 2, 0)
