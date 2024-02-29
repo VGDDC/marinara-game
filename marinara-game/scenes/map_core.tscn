@@ -56,9 +56,6 @@ transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, -0
 script = ExtResource("4_ljoms")
 targetNode = NodePath("../Player")
 
-[node name="Left Wall WIP" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.29104, 0)
-
 [node name="Enemy" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.52201, 2, 0)
 
@@ -70,3 +67,25 @@ texture = ExtResource("5_prm6p")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy"]
 transform = Transform3D(1, 0, 0, 0, 0.4, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("CylinderShape3D_6w7dy")
+
+[node name="Left Wall WIP" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -10.8948, 10.9925, 0)
+
+[node name="TestFloor" type="MeshInstance3D" parent="Left Wall WIP"]
+mesh = ExtResource("1_xq4be")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Left Wall WIP"]
+transform = Transform3D(20, 0, 0, 0, 2, 0, 0, 0, 20, 0, 0, 0)
+shape = SubResource("BoxShape3D_5dq7a")
+
+[node name="Right Wall WIP" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 10.9422, 10.9925, 0)
+
+[node name="TestFloor" type="MeshInstance3D" parent="Right Wall WIP"]
+mesh = ExtResource("1_xq4be")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Right Wall WIP"]
+transform = Transform3D(20, 0, 0, 0, 2, 0, 0, 0, 20, 0, 0, 0)
+shape = SubResource("BoxShape3D_5dq7a")
