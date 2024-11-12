@@ -11,7 +11,7 @@ public partial class Weapon : GodotObject
 	private float downTime; //Downtime after using a weapon before the player can switch or attack again
 	private int projectileCount; //Number of hurtboxes/projectiles spawned by attacking a single time
 
-	private Scene bullet; //Scene object with the default projectile fired by this weapon.
+	//private object bullet; //Scene object with the default projectile fired by this weapon.
 	private float damage; //Damage dealt by an individual projectile or swing of this weapon
 	private float lifeTime; //Amount of time before the hurt box for the weapon's attack despawns
 	private float instantVelocity; //Velocity applied to each bullet when created
