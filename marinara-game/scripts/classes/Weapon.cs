@@ -33,13 +33,12 @@ public partial class Weapon : GodotObject
 	///<param name="_damage"> float passed in for the weapon's damage value </param>
 	///<param name="_lifeTime"> float passed in for the weapon's "lifeTime" </param>
 	///<param name="_instantVelocity"> float passed in for the weapon's "instantVelocity" </param>
-	///<param name="_healMod"> float passed in for the weapon's "healMod" </param>
 	///<param name="_maxUses"> int passed in for the weapon's "maxUses" </param>
 	///<param name="iList[]"> array of ingredients passed in when creating a weapon. These are the Secondary Ingredients used to craft the weapon. </param>
 	///<param name="spritePath"> string representation of file path leading to the texture that will be used for "weaponSprite" </param>
 	///<param name="bulletPath"> string representation of file path leading to the scene that will be used for "bullet" </param>
 	///</summary>
-	Weapon(string _name, bool _autoFire, float _downTime, int _projectileCount, float _damage, float _lifeTime, float _instantVelocity, float _healMod, int _maxUses, /*Ingredient[] iList,*/ string spritePath, string bulletPath) {
+	Weapon(string _name, bool _autoFire, float _downTime, int _projectileCount, float _damage, float _lifeTime, float _instantVelocity, int _maxUses, /*Ingredient[] iList,*/ string spritePath, string bulletPath) {
 		//Instantiate variables
 		name = _name;
 		autoFire = _autoFire;
@@ -48,7 +47,7 @@ public partial class Weapon : GodotObject
 		damage = _damage;
 		lifeTime = _lifeTime;
 		instantVelocity = _instantVelocity;
-		healMod = _healMod;
+		healMod = 0.15; //0.15 is the default value for all weapons except Pistols
 		maxUses = _maxUses;
 
 		//Fetch weaponSprite & bullet
@@ -59,6 +58,7 @@ public partial class Weapon : GodotObject
 		/*
 		foreach(Ingredient i in iList) {
 			//code goes here
+			healMod += 0.05;
 		}
 		*/
 		//Instantiate "living" variables
