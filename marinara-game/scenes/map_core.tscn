@@ -26,7 +26,6 @@ height = 4.26376
 transform = Transform3D(20, 0, 0, 0, 2, 0, 0, 0, 20, 0, 0, 0)
 
 [node name="TestFloor" type="MeshInstance3D" parent="Ground"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_tofkr")
 skeleton = NodePath("../..")
 
