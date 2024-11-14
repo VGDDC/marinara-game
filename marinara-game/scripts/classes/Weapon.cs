@@ -47,7 +47,7 @@ public partial class Weapon : GodotObject
 		damage = _damage;
 		lifeTime = _lifeTime;
 		instantVelocity = _instantVelocity;
-		healMod = 0.15; //0.15 is the default value for all weapons except Pistols
+		healMod = 0.15f; //0.15 is the default value for all weapons except Pistols // someone forgot an f and it caused an error
 		maxUses = _maxUses;
 
 		//Fetch weaponSprite & bullet

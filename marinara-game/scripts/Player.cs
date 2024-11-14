@@ -5,6 +5,8 @@ public partial class Player : CharacterBody3D
 {
 	public const float moveSpeed = 5.0f;
 	//public const float jumpVelocity = 4.5f;
+	[Export]
+	public float health = 100;
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
@@ -41,4 +43,18 @@ public partial class Player : CharacterBody3D
 		Velocity = velocity;
 		MoveAndSlide();
 	}
+	
+	public void playerUpdate() {
+		//
+	}
+	
+	// use a negative/positive values in other parts of the program to modify
+	public void updateHealth(float value) {
+		health += value;
+	}
+	
+	// GETTERS
+	public float getHealth() {return health;}
+	
+	// SETTERS
 }
