@@ -39,7 +39,6 @@ transform = Transform3D(1, 0, 0, 0, 0.4, 0, 0, -7.45058e-09, 1, 0, 0, 0)
 shape = SubResource("CylinderShape3D_w5g8d")
 
 [node name="Sprite3D" type="Sprite3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 pixel_size = 0.02
 billboard = 1
 texture_filter = 0
@@ -49,7 +48,6 @@ texture = ExtResource("3_ogjna")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.364, 0.15, 0.05)
 
 [node name="Sprite3D" type="Sprite3D" parent="Player/Weapon"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 billboard = 1
 texture_filter = 0
 texture = ExtResource("4_82glr")
@@ -76,7 +74,6 @@ shape = SubResource("CylinderShape3D_6w7dy")
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -10.8948, 10.9925, 0)
 
 [node name="TestFloor" type="MeshInstance3D" parent="Left Wall WIP"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0353794, -0.406563, 0.00868273)
 mesh = ExtResource("1_xq4be")
 skeleton = NodePath("../..")
 
