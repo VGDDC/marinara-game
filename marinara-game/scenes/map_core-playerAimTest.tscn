@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://dvr733mgk6t3a"]
+
+[ext_resource type="ArrayMesh" uid="uid://bwiot0bkaq4lr" path="res://models/3D/test_floor.obj" id="1_guyhj"]
+[ext_resource type="Script" path="res://scenes/Player.cs" id="2_1ihsh"]
+[ext_resource type="Texture2D" uid="uid://d2m0lh3pudv47" path="res://sprites/player_character/temp_player.png" id="3_qccyi"]
+[ext_resource type="Texture2D" uid="uid://403hwlngvsuj" path="res://sprites/player_character/temp_weapon.png" id="4_iwjog"]
+[ext_resource type="Script" path="res://scenes/CameraMove.cs" id="5_q2ybq"]
+[ext_resource type="Texture2D" uid="uid://pbqgyyusjo3g" path="res://sprites/enemy_character/enemy_sprite.png" id="6_0y60m"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5dq7a"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_w5g8d"]
+height = 4.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6w7dy"]
+height = 4.26376
+
+[node name="TestLevel" type="Node3D"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="TestFloor" type="MeshInstance3D" parent="Ground"]
+mesh = ExtResource("1_guyhj")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(20, 0, 0, 0, 2, 0, 0, 0, 20, 0, 0, 0)
+shape = SubResource("BoxShape3D_5dq7a")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+slide_on_ceiling = false
+script = ExtResource("2_1ihsh")
+
+[node name="Pivot" type="Node3D" parent="Player"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.4, 0, 0, -7.45058e-09, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_w5g8d")
+
+[node name="Sprite3D" type="Sprite3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0.145988, 0.022527, -0.00449783)
+pixel_size = 0.02
+texture_filter = 0
+texture = ExtResource("3_qccyi")
+
+[node name="Weapon" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.464286, 0.149766, 0.0502974)
+
+[node name="Sprite3D" type="Sprite3D" parent="Player/Weapon"]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0, 0)
+texture = ExtResource("4_iwjog")
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("targetNode")]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, -0.392626, 2.53083, 5.51121)
+script = ExtResource("5_q2ybq")
+targetNode = NodePath("../Player")
+
+[node name="Left Wall WIP" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.29104, 0)
+
+[node name="Enemy" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.52201, 2, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="Enemy"]
+pixel_size = 0.02
+texture_filter = 0
+texture = ExtResource("6_0y60m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy"]
+transform = Transform3D(1, 0, 0, 0, 0.4, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_6w7dy")
