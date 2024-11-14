@@ -97,5 +97,5 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_5dq7a")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 omni_range = 30.0
