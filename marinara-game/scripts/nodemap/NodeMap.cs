@@ -9,7 +9,8 @@ public partial class NodeMap : Node
 	{
 		for (int i = 0; i < (8*5); i++)
 		{
-			var testNode = (TextureButton) GD.Load<PackedScene>("res://scenes/nodemap/blank_node.tscn").Instantiate();
+			var testNode = (RoomNode) GD.Load<PackedScene>("res://scenes/nodemap/blank_node.tscn").Instantiate();
+			testNode.Build();
 			AddChild(testNode);
 		}
 		
