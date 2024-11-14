@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://cug16bnc880xh"]
+[gd_scene load_steps=12 format=3 uid="uid://cug16bnc880xh"]
 
-[ext_resource type="ArrayMesh" uid="uid://bwiot0bkaq4lr" path="res://models/3D/test_floor.obj" id="1_xq4be"]
 [ext_resource type="Script" path="res://scripts/Player.cs" id="2_msurb"]
 [ext_resource type="Texture2D" uid="uid://d2m0lh3pudv47" path="res://sprites/player_character/temp_player.png" id="3_ogjna"]
 [ext_resource type="Texture2D" uid="uid://403hwlngvsuj" path="res://sprites/player_character/temp_weapon.png" id="4_82glr"]
 [ext_resource type="Script" path="res://scripts/CameraMove.cs" id="5_l5gto"]
 [ext_resource type="Texture2D" uid="uid://pbqgyyusjo3g" path="res://sprites/enemy_character/enemy_sprite.png" id="5_prm6p"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_tofkr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5dq7a"]
 
@@ -15,16 +16,21 @@ height = 4.0
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_6w7dy"]
 height = 4.26376
 
+[sub_resource type="BoxMesh" id="BoxMesh_rvood"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_nl3q4"]
+
 [node name="TestLevel" type="Node3D"]
 
 [node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 2, 0, 0, 0, 20, 0, 0, 0)
 
 [node name="TestFloor" type="MeshInstance3D" parent="Ground"]
-mesh = ExtResource("1_xq4be")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_tofkr")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
-transform = Transform3D(20, 0, 0, 0, 2, 0, 0, 0, 20, 0, 0, 0)
 shape = SubResource("BoxShape3D_5dq7a")
 
 [node name="Player" type="CharacterBody3D" parent="."]
@@ -71,23 +77,25 @@ transform = Transform3D(1, 0, 0, 0, 0.4, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("CylinderShape3D_6w7dy")
 
 [node name="Left Wall WIP" type="StaticBody3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -10.8948, 10.9925, 0)
+transform = Transform3D(-8.74228e-07, -2, 0, 20, -8.74228e-08, 0, 0, 0, 20, -11, 11, 0)
 
 [node name="TestFloor" type="MeshInstance3D" parent="Left Wall WIP"]
-mesh = ExtResource("1_xq4be")
+mesh = SubResource("BoxMesh_rvood")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Left Wall WIP"]
-transform = Transform3D(20, 0, 0, 0, 2, 0, 0, 0, 20, 0, 0, 0)
 shape = SubResource("BoxShape3D_5dq7a")
 
 [node name="Right Wall WIP" type="StaticBody3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 10.9422, 10.9925, 0)
+transform = Transform3D(-8.74228e-07, -2, 0, 20, -8.74228e-08, 0, 0, 0, 20, 11, 11, 0)
 
 [node name="TestFloor" type="MeshInstance3D" parent="Right Wall WIP"]
-mesh = ExtResource("1_xq4be")
+mesh = SubResource("BoxMesh_nl3q4")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Right Wall WIP"]
-transform = Transform3D(20, 0, 0, 0, 2, 0, 0, 0, 20, 0, 0, 0)
 shape = SubResource("BoxShape3D_5dq7a")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+omni_range = 30.0
