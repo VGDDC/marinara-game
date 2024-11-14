@@ -41,7 +41,7 @@ script = ExtResource("2_msurb")
 [node name="Pivot" type="Node3D" parent="Player"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 0.4, 0, 0, -7.45058e-09, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.4, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("CylinderShape3D_w5g8d")
 
 [node name="Sprite3D" type="Sprite3D" parent="Player"]
@@ -64,7 +64,7 @@ script = ExtResource("5_l5gto")
 targetNode = NodePath("../Player")
 
 [node name="Enemy" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.52201, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.8, 0)
 
 [node name="Sprite3D" type="Sprite3D" parent="Enemy"]
 pixel_size = 0.02
@@ -77,7 +77,7 @@ transform = Transform3D(1, 0, 0, 0, 0.4, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("CylinderShape3D_6w7dy")
 
 [node name="Left Wall WIP" type="StaticBody3D" parent="."]
-transform = Transform3D(-8.74228e-07, -2, 0, 20, -8.74228e-08, 0, 0, 0, 20, -11, 11, 0)
+transform = Transform3D(2, 0, 0, 0, 20, 0, 0, 0, 20, -11, 11, 0)
 
 [node name="TestFloor" type="MeshInstance3D" parent="Left Wall WIP"]
 mesh = SubResource("BoxMesh_rvood")
@@ -86,8 +86,24 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Left Wall WIP"]
 shape = SubResource("BoxShape3D_5dq7a")
 
+[node name="Back Wall WIP" type="StaticBody3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 2, 0, 11, -11)
+
+[node name="TestFloor" type="MeshInstance3D" parent="Back Wall WIP"]
+mesh = SubResource("BoxMesh_rvood")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Back Wall WIP"]
+shape = SubResource("BoxShape3D_5dq7a")
+
+[node name="Front Wall WIP" type="StaticBody3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 2, 0, 11, 11)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Front Wall WIP"]
+shape = SubResource("BoxShape3D_5dq7a")
+
 [node name="Right Wall WIP" type="StaticBody3D" parent="."]
-transform = Transform3D(-8.74228e-07, -2, 0, 20, -8.74228e-08, 0, 0, 0, 20, 11, 11, 0)
+transform = Transform3D(2, 0, 0, 0, 20, 0, 0, 0, 20, 11, 11, 0)
 
 [node name="TestFloor" type="MeshInstance3D" parent="Right Wall WIP"]
 mesh = SubResource("BoxMesh_nl3q4")
