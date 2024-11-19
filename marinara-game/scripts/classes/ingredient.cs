@@ -13,9 +13,9 @@ public partial class ingredient : Node
 		ingredient option;
 		Random random = new Random();
 		
-		index = random.Next(0, this.allIngredients.Count);
+		index = random.Next(0, allIngredients.Count);
 		
-		option = this.allIngredients[index];
+		option = allIngredients[index];
 		
 		return option;
 	}
