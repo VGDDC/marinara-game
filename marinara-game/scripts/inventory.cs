@@ -3,7 +3,7 @@ using System;
 
 public partial class inventory : Node3D
 {
-	Godot.Collections.Array<ingredient> ingrediantlist;
+	Godot.Collections.Array<ingredient> ingredientlist;
 	
 	
 	
