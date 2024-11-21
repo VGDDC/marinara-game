@@ -8,7 +8,7 @@ public partial class CameraMove : Camera3D
 	[Export]
 	public Node3D targetNode {get; set; } //Node object which the camera will follow at an offset
 	
-	public Vector3 offset = new Vector3(0.0f,2.1f,4.2f); //Offset position from targetNode
+	public Vector3 offset = new Vector3(0.0f,3.3f,3.3f); //Offset position from targetNode
 	
 	
 	// Called when the node enters the scene tree for the first time.

@@ -33,7 +33,7 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_5dq7a")
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.6, 3.5)
 slide_on_ceiling = false
 script = ExtResource("2_msurb")
 
@@ -58,7 +58,7 @@ texture_filter = 0
 texture = ExtResource("4_82glr")
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("targetNode")]
-transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, -0.392626, 2.53083, 5.51121)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.392626, 2.53083, 5.51121)
 script = ExtResource("5_l5gto")
 targetNode = NodePath("../Player")
 
