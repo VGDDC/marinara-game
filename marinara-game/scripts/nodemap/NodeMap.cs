@@ -15,15 +15,15 @@ public partial class NodeMap : Node
 	{
 		CONNECTIONCHANCE = 0.85f;
 		// Could probably factor this out into file, but that's not a high priority.
-		RANDOMIZATION_OPTIONS = new string[8]{
-			"EXPLORATION 100;1 100",
-			"EXPLORATION 80 WAVEDEFENSE 20;2 50 3 50",
-			"EXPLORATION 70 WAVEDEFENSE 30;P 1",
-			"EXPLORATION 60 WAVEDEFENSE 30 SHOP 10;P 1",
-			"EXPLORATION 55 WAVEDEFENSE 35 SHOP 10;3 50 4 50",
-			"EXPLORATION 45 WAVEDEFENSE 40 SHOP 15;2 50 3 50",
-			"SHOP 100;2 100",
-			"BOSS 100;1 100"
+		RANDOMIZATION_OPTIONS = new string[8] {
+			"exploration 100;1 100",
+			"exploration 80 wavedefense 20;2 50 3 50",
+			"exploration 70 wavedefense 30;P 1",
+			"exploration 60 wavedefense 30 shop 10;P 1",
+			"exploration 55 wavedefense 35 shop 10;3 50 4 50",
+			"exploration 45 wavedefense 40 shop 15;2 50 3 50",
+			"shop 100;2 100",
+			"boss 100;1 100"
 		};
 
 		RandomizeNodeMap();
@@ -95,7 +95,7 @@ public partial class NodeMap : Node
 	public void RandomizeNodeMap()
 	{
 		ClearNodeMap();
-
+		
 		// First cell is always Exploration
 		SetCell(0, 2, "exploration");
 
@@ -159,7 +159,7 @@ public partial class NodeMap : Node
 		{
 			possible_idxs = new List<int>{0, 1, 2, 3, 4};
 		}
-
+		
 		// Add nodes until an 'amount' amount have been added
 		while (amount > 0)
 		{
@@ -177,11 +177,11 @@ public partial class NodeMap : Node
 			{
 				idx = possible_idxs[0];
 			}
-
+			
 			// Finally, add the cell
 			if (CheckValidityOfCell(col, idx))
 			{
-				SetCell(col, idx, "shop");
+				SetCell(col, idx, ChooseRandomStringFromWeights(room_weights));
 				amount--;
 			}
 		}
@@ -199,7 +199,31 @@ public partial class NodeMap : Node
 
 	public bool CheckValidityOfCell(int col, int idx)
 	{
-		return true;
+		var toCheck = new int[2];
+
+		// Make sure we stay in bounds
+		if (idx == 0)
+		{
+			toCheck = new int[] {0, 1};
+		}
+		else if (idx == 4)
+		{
+			toCheck = new int[] {3, 4};
+		}
+		else
+		{
+			toCheck = new int[] {idx - 1, idx, idx + 1};
+		}
+		
+		foreach (int i in toCheck)
+		{
+			if (nodeMap[col-1, i].Exists())
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 
