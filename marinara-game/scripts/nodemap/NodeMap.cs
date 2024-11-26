@@ -1,14 +1,19 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class NodeMap : Node
 {
 	private string[] RANDOMIZATION_OPTIONS;
 	private RoomNode[,] nodeMap;
+
+	public float CONNECTIONCHANCE;
+
 	//private TextureButton testNode;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		CONNECTIONCHANCE = 0.85f;
 		// Could probably factor this out into file, but that's not a high priority.
 		RANDOMIZATION_OPTIONS = new string[8]{
 			"EXPLORATION 100;1 100",
@@ -27,7 +32,10 @@ public partial class NodeMap : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		
+		if (Input.IsActionJustPressed("primary_action"))
+		{
+			RandomizeNodeMap();
+		}
 	}
 
 	//========================================================
@@ -62,10 +70,27 @@ public partial class NodeMap : Node
 		}
 	}
 
+	public int CountNodesInColumn(int col)
+	{
+		var amount = 0;
+
+		// Just adding up the assigned nodes in a given column
+		for (int i = 0; i < 5; i++)
+		{
+			if (nodeMap[col, i].Exists())
+			{
+				amount++;
+			}
+		}
+		
+		return amount;
+	}
+
 	//========================================================
 	//       R A N D O M I Z A T I O N   M E T H O D S
 	//
 	//                  Proceed with Caution
+	//                    ~It's very iffy~
 	//========================================================
 	public void RandomizeNodeMap()
 	{
@@ -88,5 +113,148 @@ public partial class NodeMap : Node
 
 		// Last cell is always the boss
 		SetCell(7, 2, "boss");
+
+		// Randomize nodes in the rest of the columns
+		for (int col = 1; col < 6; col++)
+		{
+			RandomizeColumn(col);
+			// And make sure they are all valid
+			while (!ValidateColumn(col))
+			{
+				RandomizeColumn(col);
+			}
+		}
+
+		RandomizeConnections();
+	}
+
+	public void RandomizeColumn(int col)
+	{
+		// Parse Weights
+		string[] weights = RANDOMIZATION_OPTIONS[col].Split(";");
+		string[] room_weights = weights[0].Split(" ");
+		string[] amount_weights = weights[1].Split(" ");
+
+		var amount = 0;
+
+		// A 'P' means that you take the previous columns amount,
+		// and randomly add 0 - Given to it for this column
+		if (amount_weights[0].Equals("P"))
+		{
+			amount = CountNodesInColumn(col - 1) + (int) (GD.Randi() % (int.Parse(amount_weights[1]) + 1));
+		}
+		else
+		{
+			amount = ChooseRandomIntegerFromWeights(amount_weights);
+		}
+
+		var possible_idxs = new List<int>();
+
+		// The second column should only have nodes in the middle 3 rows
+		if (col == 1)
+		{
+			possible_idxs = new List<int>{1, 2, 3};
+		}
+		else
+		{
+			possible_idxs = new List<int>{0, 1, 2, 3, 4};
+		}
+
+		// Add nodes until an 'amount' amount have been added
+		while (amount > 0)
+		{
+			// the index from possible_idxs that will be passed to SetCell
+			var idx = 0;
+
+			// Items are removed, so if there is one last item it is by default added
+			if (possible_idxs.Count > 1)
+			{
+				var choice = (int) (GD.Randi() % possible_idxs.Count);
+				idx = possible_idxs[choice];
+				possible_idxs.RemoveAt(choice);
+			}
+			else
+			{
+				idx = possible_idxs[0];
+			}
+
+			// Finally, add the cell
+			if (CheckValidityOfCell(col, idx))
+			{
+				SetCell(col, idx, "shop");
+				amount--;
+			}
+		}
+	}
+
+	public bool ValidateColumn(int col)
+	{
+		return true;
+	}
+
+	public void RandomizeConnections()
+	{
+
+	}
+
+	public bool CheckValidityOfCell(int col, int idx)
+	{
+		return true;
+	}
+
+
+	public int ChooseRandomIntegerFromWeights(string[] weights)
+	{
+		var total  = 0;
+		var amount = 0;
+
+		// [1 - 100], Inclusive
+		// Rolling a 1d100 here
+		var choice = GD.Randi() % 100 + 1;
+
+		// The weights come in pairs (Choice, Odds)
+		for (int i = 0; i < (weights.Length / 2); i++)
+		{
+			// Keep adding the weights until the total is over the rolled number
+			total = total + int.Parse(weights[i*2+1]);
+			if (choice <= total)
+			{
+				// Once it is over, you have found your random integer.
+				return int.Parse(weights[i*2]);
+			}
+		}
+
+		// Default to the first option if the above logic breaks
+		// Not added yet for testing purposes
+		// TODO
+		return -1;
+	}
+
+	// As above but with a little less integer parsing
+	public string ChooseRandomStringFromWeights(string[] weights)
+	{
+		var total  = 0;
+		var amount = 0;
+
+		// [1 - 100], Inclusive
+		// Rolling a 1d100 here
+		var choice = GD.Randi() % 100 + 1;
+
+		// The weights come in pairs (Choice, Odds)
+		for (int i = 0; i < (weights.Length / 2); i++)
+		{
+			// Keep adding the weights until the total is over the rolled number
+			total = total + int.Parse(weights[i*2+1]);
+			if (choice <= total)
+			{
+				// Once it is over, you have found your random string.
+				return weights[i*2];
+			}
+		}
+
+		// Default to the first option if the above logic breaks
+		// Not added yet for testing purposes
+		// TODO
+		return "AHHHHHHHHHHHHHHHHHHHHHHHHHHHH";
 	}
 }
