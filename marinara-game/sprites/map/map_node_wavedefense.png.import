@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7b8opuwpf53s"
-path="res://.godot/imported/map_node_blue.png-803fbb071df98865696d248da43834f9.ctex"
+uid="uid://b3m7nhlnpx5rh"
+path="res://.godot/imported/map_node_wavedefense.png-bd7f22ed6a9767103850e6439193250f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/map/map_node_blue.png"
-dest_files=["res://.godot/imported/map_node_blue.png-803fbb071df98865696d248da43834f9.ctex"]
+source_file="res://sprites/map/map_node_wavedefense.png"
+dest_files=["res://.godot/imported/map_node_wavedefense.png-bd7f22ed6a9767103850e6439193250f.ctex"]
 
 [params]
 

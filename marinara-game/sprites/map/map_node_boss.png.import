@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cm13q4ym8lohs"
-path="res://.godot/imported/map_node_green.png-1328aced241a65e4324de8c0671f6beb.ctex"
+uid="uid://u8p1nom4dmgj"
+path="res://.godot/imported/map_node_boss.png-9b1eca6d78ac2c3b92df4c1f3e953471.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/map/map_node_green.png"
-dest_files=["res://.godot/imported/map_node_green.png-1328aced241a65e4324de8c0671f6beb.ctex"]
+source_file="res://sprites/map/map_node_boss.png"
+dest_files=["res://.godot/imported/map_node_boss.png-9b1eca6d78ac2c3b92df4c1f3e953471.ctex"]
 
 [params]
 
