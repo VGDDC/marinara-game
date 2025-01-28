@@ -11,9 +11,11 @@ public partial class RoomNode : TextureButton
 
 	private List<RoomNode> connections;
 	
+	private static root rootNode;
+
 	// Build
 	public RoomNode OfType(string _type)
-	{
+	{	
 		this.type = _type;
 		return this;
 	}
@@ -26,6 +28,11 @@ public partial class RoomNode : TextureButton
 		Position = new Vector2(x*80+20, y*80);
 
 		return this;
+	}
+	
+	public void LoadLevel()
+	{
+		
 	}
 	
 	public void Refresh()
@@ -50,8 +57,6 @@ public partial class RoomNode : TextureButton
 	public void AddConnection(RoomNode node)
 	{
 		connections.Add(node);
-
-		
 	}
 
 	// Getters
@@ -60,14 +65,14 @@ public partial class RoomNode : TextureButton
 		return Position;
 	}
 	
-	public float GetX()
+	public int GetX()
 	{
-		return Position[0];
+		return x;
 	}
 	
-	public float GetY()
+	public int GetY()
 	{
-		return Position[1];
+		return y;
 	}
 	
 	public string GetNodeType()
@@ -80,12 +85,28 @@ public partial class RoomNode : TextureButton
 		return this.exists;
 	}
 
+	public bool HasConnectionTo(int rightY)
+	{
+		for (int i = 0; i < connections.Count; i++) {
+			if (connections[i].GetY() == rightY) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	// Setters
 	public void SetType(string _type)
 	{
 		this.type = _type;
 	}
 
+
+	public void OnClick() {
+		var tempNode = (NodeMap) GetParent();
+		rootNode = (root) tempNode.GetParent();
+		rootNode.LoadLevel(this.type);
+	}
 	
 	// Dunder Zone
 	public override string ToString()

@@ -1,0 +1,98 @@
+[gd_scene load_steps=11 format=3 uid="uid://2rnb1ofpmkpe"]
+
+[ext_resource type="Material" uid="uid://d2i2pse1uov8h" path="res://materials/wavedefense.tres" id="1_jtl5b"]
+[ext_resource type="ArrayMesh" uid="uid://bwiot0bkaq4lr" path="res://models/3D/test_floor.obj" id="2_4lx2i"]
+[ext_resource type="Script" path="res://scripts/Player.cs" id="3_trmar"]
+[ext_resource type="Texture2D" uid="uid://d2m0lh3pudv47" path="res://sprites/player_character/temp_player.png" id="4_wd1m7"]
+[ext_resource type="Texture2D" uid="uid://403hwlngvsuj" path="res://sprites/player_character/temp_weapon.png" id="5_m3rxv"]
+[ext_resource type="Script" path="res://scripts/CameraMove.cs" id="6_rnmyi"]
+[ext_resource type="Texture2D" uid="uid://pbqgyyusjo3g" path="res://sprites/enemy_character/enemy_sprite.png" id="7_sb4tu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5dq7a"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_w5g8d"]
+height = 4.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6w7dy"]
+height = 4.26376
+
+[node name="TestLevel" type="Node3D"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="TestFloor" type="MeshInstance3D" parent="Ground"]
+material_override = ExtResource("1_jtl5b")
+mesh = ExtResource("2_4lx2i")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(20, 0, 0, 0, 2, 0, 0, 0, 20, 0, 0, 0)
+shape = SubResource("BoxShape3D_5dq7a")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+slide_on_ceiling = false
+script = ExtResource("3_trmar")
+
+[node name="Pivot" type="Node3D" parent="Player"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.4, 0, 0, -7.45058e-09, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_w5g8d")
+
+[node name="Sprite3D" type="Sprite3D" parent="Player"]
+pixel_size = 0.02
+billboard = 1
+texture_filter = 0
+texture = ExtResource("4_wd1m7")
+
+[node name="Weapon" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.364, 0.15, 0.05)
+
+[node name="Sprite3D" type="Sprite3D" parent="Player/Weapon"]
+billboard = 1
+texture_filter = 0
+texture = ExtResource("5_m3rxv")
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("targetNode")]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, -0.392626, 2.53083, 5.51121)
+script = ExtResource("6_rnmyi")
+targetNode = NodePath("../Player")
+
+[node name="Enemy" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.52201, 2, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="Enemy"]
+pixel_size = 0.02
+billboard = 1
+texture_filter = 0
+texture = ExtResource("7_sb4tu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy"]
+transform = Transform3D(1, 0, 0, 0, 0.4, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_6w7dy")
+
+[node name="Left Wall WIP" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -10.8948, 10.9925, 0)
+
+[node name="TestFloor" type="MeshInstance3D" parent="Left Wall WIP"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0353794, -0.406563, 0.00868273)
+material_override = ExtResource("1_jtl5b")
+mesh = ExtResource("2_4lx2i")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Left Wall WIP"]
+transform = Transform3D(20, 0, 0, 0, 2, 0, 0, 0, 20, 0, 0, 0)
+shape = SubResource("BoxShape3D_5dq7a")
+
+[node name="Right Wall WIP" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 10.9422, 10.9925, 0)
+
+[node name="TestFloor" type="MeshInstance3D" parent="Right Wall WIP"]
+material_override = ExtResource("1_jtl5b")
+mesh = ExtResource("2_4lx2i")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Right Wall WIP"]
+transform = Transform3D(20, 0, 0, 0, 2, 0, 0, 0, 20, 0, 0, 0)
+shape = SubResource("BoxShape3D_5dq7a")
