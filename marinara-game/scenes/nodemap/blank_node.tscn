@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjwgnkpwmhlkj"]
+
+[ext_resource type="Texture2D" uid="uid://byav4qefxfbvn" path="res://sprites/map/temp_mapNode.png" id="1_7hu1w"]
+[ext_resource type="Script" path="res://scripts/nodemap/RoomNode.cs" id="2_1ajxe"]
+
+[node name="blank_node" type="TextureButton"]
+texture_normal = ExtResource("1_7hu1w")
+script = ExtResource("2_1ajxe")
+
+[connection signal="pressed" from="." to="." method="OnClick"]

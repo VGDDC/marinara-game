@@ -1,11 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://fg6587y5oyoq"]
+[gd_scene load_steps=5 format=3 uid="uid://fg6587y5oyoq"]
 
 [ext_resource type="Script" path="res://scripts/inventory.cs" id="1_8d4ts"]
+[ext_resource type="Script" path="res://root.cs" id="1_cg4g8"]
 [ext_resource type="PackedScene" uid="uid://cug16bnc880xh" path="res://scenes/map_core.tscn" id="2_fusyx"]
+[ext_resource type="PackedScene" uid="uid://bi2bodp3hrdmt" path="res://scenes/nodemap/nodemap.tscn" id="4_cqcdd"]
 
-[node name="Root" type="Node3D"]
+[node name="Root" type="Node3D" node_paths=PackedStringArray("nodeMap", "currentLevel")]
+script = ExtResource("1_cg4g8")
+nodeMap = NodePath("nodemap")
+currentLevel = NodePath("TestLevel")
 
 [node name="inventory" type="Node3D" parent="."]
 script = ExtResource("1_8d4ts")
 
 [node name="TestLevel" parent="." instance=ExtResource("2_fusyx")]
+
+[node name="nodemap" parent="." instance=ExtResource("4_cqcdd")]
+visible = false
