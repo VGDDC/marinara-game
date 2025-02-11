@@ -6,6 +6,7 @@ public partial class ingredient : Node
 {
 	// list all ingredient options here
 	public Array<ingredient> allIngredients;
+	public int numOf;
 	
 	// returns a random ingredient object from full list of ingredients
 	public ingredient randomIngredient() {
@@ -18,6 +19,10 @@ public partial class ingredient : Node
 		option = allIngredients[index];
 		
 		return option;
+	}
+	public void increment()
+	{
+		numOf ++;
 	}
 	
 	// GETTERS
