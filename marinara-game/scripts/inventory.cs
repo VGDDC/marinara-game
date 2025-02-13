@@ -5,7 +5,7 @@ public partial class inventory : Node3D
 {
 	Godot.Collections.Array<ingredient> ingredientList;
 	Godot.Collections.Array<Weapon> weaponsList
-	
+	public bool isFull;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -33,12 +33,10 @@ public partial class inventory : Node3D
 	{
 		if(weaponList.size() < 4) {
 			weaponList.Add(wep);
+			return true;
 			//Other weapon adding stuff
 		}
-		else
-		{
-			//fail pickup
-		}
+		return false;
 	}
 	public Array<ingredient> getIngredients()
 	{
@@ -56,5 +54,12 @@ public partial class inventory : Node3D
 	{
 		ingredientList = ingList;
 	}
-	
+	public Weapon getWeapon(int key)
+	{
+		if(key < weaponList.size())
+		{
+			return weaponList[key];
+		}
+		return null
+	}
 }
