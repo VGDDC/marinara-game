@@ -29,10 +29,6 @@ public partial class inventory : Node3D
 			inredientList[find].increment();
 		}
 	}
-	public Array<ingredient> getIngredients()
-	{
-		return ingredientList;
-	}
 	public void addWeapon(Weapon wep)
 	{
 		if(weaponList.size() < 4) {
@@ -43,6 +39,10 @@ public partial class inventory : Node3D
 		{
 			//fail pickup
 		}
+	}
+	public Array<ingredient> getIngredients()
+	{
+		return ingredientList;
 	}
 	public Array<Weapon> getWeapons()
 	{
