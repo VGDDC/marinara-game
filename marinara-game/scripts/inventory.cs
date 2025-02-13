@@ -29,7 +29,7 @@ public partial class inventory : Node3D
 			inredientList[find].increment();
 		}
 	}
-	public void addWeapon(Weapon wep)
+	public bool addWeapon(Weapon wep)
 	{
 		if(weaponList.size() < 4) {
 			weaponList.Add(wep);
