@@ -35,14 +35,14 @@ public partial class NodeMap : Node
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	/*public override void _Process(double delta)
+	public override void _Process(double delta)
 	{
 		if (Input.IsActionJustPressed("move_down"))
 		{
 			var tempNode = (root) GetParent();
 			tempNode.ResetNodeMap();
 		}
-	}*/
+	}
 
 	//========================================================
 	//            N O D E  M A P   M E T H O D S
@@ -90,17 +90,26 @@ public partial class NodeMap : Node
 		return amount;
 	}
 
-	public void AddConnection(RoomNode nodeL, RoomNode nodeR)
+	public void DrawConnections()
 	{
+		foreach (RoomNode node in nodeMap) {
+			if (!node.Exists()) {
+				continue;
+			}
+			foreach (RoomNode toNode in node.GetConnections()) {
+				DrawConnectionLine(node, toNode);
+			}
+		}
+	}
+	
+	public void DrawConnectionLine(RoomNode left, RoomNode right) {
 		var newLine = new Line2D();
 		newLine.DefaultColor = new Color(0, 0, 0);
 		newLine.Width = 3.0f;
 
-		newLine.AddPoint(nodeL.Position + connectionCorrection);
-		newLine.AddPoint(nodeR.Position + connectionCorrection);
+		newLine.AddPoint(left.Position + connectionCorrection);
+		newLine.AddPoint(right.Position + connectionCorrection);
 		AddChild(newLine);
-
-		nodeL.AddConnection(nodeR);
 	}
 
 	//========================================================
@@ -132,15 +141,16 @@ public partial class NodeMap : Node
 		// Randomize nodes in the rest of the columns
 		for (int col = 1; col < 6; col++) {
 			RandomizeColumn(col);
+			while (!ValidateColumn(col) || !ValidateColumnAhead(col-1)) {
+				RandomizeColumn(col);
+			}
 		}
 
-		//var wrongCol = ValidateNodePlacements();
-		//while (wrongCol != 0) {
-		//	RandomizeColumn(wrongCol);
-		//	wrongCol = ValidateNodePlacements();
-		//}
+		while (!ValidateColumn(5) || !ValidateColumnAhead(5)) {
+			RandomizeColumn(5);
+		}
 
-		//RandomizeConnections();
+		RandomizeConnections();
 	}
 
 	public void RandomizeColumn(int col)
@@ -194,11 +204,15 @@ public partial class NodeMap : Node
 		}
 	}
 
-	// Returns column with wrong placement,
+	// Returns column idx with wrong placement,
 	// Returns 0 if everything is fine
 	private int ValidateNodePlacements()
 	{
-		
+		for (int col = 2; col < 6; col++) {
+			if (!ValidateColumn(col)) {
+				return col;
+			}
+		}
 		return 0;
 	}
 
@@ -230,67 +244,201 @@ public partial class NodeMap : Node
 		return true;
 	}
 
+	public bool ValidateColumnAhead(int col) {
+		for (int i = 0; i < 5; i++) {
+			if (!nodeMap[col, i].Exists()) {
+				continue;
+			}
+
+			if (i != 0) {
+				if (nodeMap[col+1, i-1].Exists()) {
+					continue;
+				}
+			}
+			if (i != 4) {
+				if (nodeMap[col+1, i+1].Exists()) {
+					continue;
+				}
+			}
+
+			if (nodeMap[col+1, i].Exists()) {
+				continue;
+			}
+
+			return false;
+		}
+
+		return true;
+	}
+
 	private void RandomizeConnections()
 	{
-		for (int i = 0; i < 5; i++) {
+		for (int i = 1; i < 4; i++) {
 			if (nodeMap[1, i].Exists()) {
-				AddConnection(nodeMap[0, 2], nodeMap[1, i]);
+				nodeMap[0, 2].AddConnection(nodeMap[1, i]);
+				nodeMap[1, i].SetConnectedTo(true);
 			}
 		}
 
 		for (int col = 1; col < 6; col++) {
 			connectColumns(col, col+1);
 		}
-
-		for (int col = 1; col < 7; col++) {
-			doubleCheckNodesInColumn(col);
+		
+		
+		for (int col = 1; col < 6; col++) {
+			doubleCheckConnections(col, 10);
 		}
+		
+		nodeMap[6, 1].AddConnection(nodeMap[7, 2]);
+		nodeMap[6, 3].AddConnection(nodeMap[7, 2]);
+		nodeMap[7, 2].SetConnectedTo(true);
 
-		AddConnection(nodeMap[6, 1], nodeMap[7, 2]);
-		AddConnection(nodeMap[6, 3], nodeMap[7, 2]);
+		DrawConnections();
+	}
+	
+	private bool checkConnectionsOfColumn(int col) {
+		for (int y = 0; y < 5; y++) {
+			if (!nodeMap[col, y].Exists()) {
+				continue;
+			}
+			
+			if (!nodeMap[col, y].HasConnectionFrom()) {
+				//GD.Print(col.ToString() + ", " + y.ToString() + " - " + nodeMap[col, y].GetConnections());
+				//GD.Print("XXX");
+				return false;
+			}
+		}
+		
+		for (int y = 0; y < 5; y++) {
+			if (!nodeMap[col+1, y].Exists()) {
+				continue;
+			}
+			
+			if (!nodeMap[col+1, y].IsConnectedTo()) {
+				//GD.Print("OOO");
+				//GD.Print((col+1).ToString() + ", " + y.ToString() + " - " + nodeMap[col+1, y].GetConnections());
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private void doubleCheckConnections (int idx, int n) {
+		// Check Connections;
+		bool columnLegalForward = true;
+		bool columnLegalBackward = true;
+		
+		// If not connect forward, connect(idx)
+		columnLegalForward = checkConnectionsOfColumn(idx);
+		//columnLegalBackward = checkConnectionsOfColumn(idx-1);
+		
+		//GD.Print(columnLegalForward);
+		//GD.Print(idx);
+		
+		if (!columnLegalForward) {
+			for (int y = 0; y < 5; y++) {
+				nodeMap[idx,y].ClearConnections();
+				nodeMap[idx+1, y].SetConnectedTo(false);
+			}
+			connectColumns(idx, idx+1);
+		}
+		else {
+			return;
+		}
+		
+		//if (!columnLegalBackward) {
+		//	for (int y = 0; y < 5; y++) {
+		//		nodeMap[idx-1,y].ClearConnections();
+		//		nodeMap[idx, y].SetConnectedTo(false);
+		//	}
+		//	connectColumns(idx-1, idx);
+		//}
+		
+		//return;
+		// Double double check them, I love recursion
+		doubleCheckConnections(idx, n-1);
 	}
 
 	private void connectColumns(int leftIdx, int rightIdx)
 	{
 		for (int iL = 0; iL < 5; iL++) {
+			if (!nodeMap[leftIdx, iL].Exists()) {
+				continue;
+			}
 			for (int iR = 0; iR < 5; iR++) {
-				if (Math.Abs(iL-iR) > 1) {
+				if (!nodeMap[rightIdx, iR].Exists()) {
 					continue;
 				}
 				
-				if (!ConnectionValid(nodeMap[leftIdx, iL], nodeMap[rightIdx, iR])) {
+				if (Math.Abs(iL-iR) > 1) {
+					//GD.Print(iL.ToString() + " - " + iR.ToString() + " = " + Math.Abs(iL-iR).ToString());
+					continue;
+				}
+				
+				if ((GD.Randi() % 100) < 50) {
 					continue;
 				}
 
-				AddConnection(nodeMap[leftIdx, iL], nodeMap[rightIdx, iR]);
+				if (!ConnectionValid(nodeMap[leftIdx, iL], nodeMap[rightIdx, iR])) {
+					GD.Print("++++++++++");
+					GD.Print(leftIdx.ToString() + ", " + iL.ToString());
+					GD.Print(rightIdx.ToString() + ", " + iR.ToString());
+					GD.Print("++++++++++");
+					continue;
+				}
+
+				nodeMap[leftIdx, iL].AddConnection(nodeMap[rightIdx, iR]);
+				nodeMap[rightIdx, iR].SetConnectedTo(true);
 			}
 		}
 	}
 
-	private void doubleCheckNodesInColumn(int colIdx)
+	private bool doubleCheckNodesInColumn(int colIdx)
 	{
-		
+		for (int i = 0; i < 5; i++) {
+			if (!nodeMap[colIdx, i].Exists()) {
+				continue;
+			}
+
+			for (int leftI = i-1; leftI < i+1; leftI++) {
+				if ((leftI == -1 ) || (leftI == 5)) {
+					continue;
+				}
+
+				if (!ConnectionValid(nodeMap[colIdx, i], nodeMap[colIdx-1, leftI])) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	private bool ConnectionValid(RoomNode nodeL, RoomNode nodeR)
 	{
 		if (!nodeL.Exists() || !nodeR.Exists()) {
+			GD.Print("Throw 3");
 			return false;
 		}
 
 		if (nodeL.GetY() == nodeR.GetY()) {
 			return true;
 		}
-
-		if (nodeL.GetY() != 0) {
-			if (nodeMap[nodeL.GetX(), nodeL.GetY()-1].HasConnectionTo(nodeL.GetY())) {
-				return false;
+		
+		if (nodeR.GetY() == (nodeL.GetY()-1)) {
+			if (nodeL.GetY() != 0) {
+				if (nodeMap[nodeL.GetX(), nodeL.GetY()-1].HasConnectionTo(nodeL.GetY())) {
+					GD.Print("Throw 1");
+					return false;
+				}
 			}
 		}
-
-		if (nodeL.GetY() != 4) {
-			if (nodeMap[nodeL.GetX(), nodeL.GetY()+1].HasConnectionTo(nodeL.GetY())) {
-				return false;
+		
+		if (nodeR.GetY() == (nodeL.GetY()+1)) {
+			if (nodeL.GetY() != 4) {
+				if (nodeMap[nodeL.GetX(), nodeL.GetY()+1].HasConnectionTo(nodeL.GetY())) {
+					GD.Print("Throw 2");
+					return false;
+				}
 			}
 		}
 
@@ -380,10 +528,5 @@ public partial class NodeMap : Node
 		// Not added yet for testing purposes
 		// TODO
 		return "AHHHHHHHHHHHHHHHHHHHHHHHHHHHH";
-	}
-
-	private void DrawConnections()
-	{
-		
 	}
 }
