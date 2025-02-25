@@ -3,23 +3,14 @@ using System;
 
 public partial class inventory : Node3D
 {
-	Godot.Collections.Array<ingredient> ingredientList;
-	Godot.Collections.Array<Weapon> weaponsList
+	Godot.Collections.Array<ingredient> mainIngList;
+	Godot.Collections.Array<ingredient> subIngList;
+	Godot.Collections.Array<Weapon> weaponsList;
+	public int goldCarrots;
 	public bool isFull; // bool to check if weapon list is full
-	
-	public void addIngredient(ingredient ing, int num) // add num of ingredient
-	{
-		int find = ingredientList.find(ing);
-		if(find == -1)
-		{
-			ingredientList.Add(ing);
-			inredientList[find].increment(num);
-		}
-		else
-		{
-			inredientList[find].increment(num);
-		}
-	}
+	public int getCarrots() { return goldCarrots; }
+	public void setCarrots(int i) { goldCarrots = i; }
+	public void incrementCarrots(int i) { goldCarrots += i; }
 	public bool addWeapon(Weapon wep) // add weapon to list, return false if already has 4 weapons
 	{
 		if(weaponList.size() < 4) {
@@ -29,22 +20,8 @@ public partial class inventory : Node3D
 		}
 		return false;
 	}
-	public Array<ingredient> getIngredients() // return ingredient list
-	{
-		return ingredientList;
-	}
-	public Array<Weapon> getWeapons() // return weapon list
-	{
-		return weaponList;
-	}
-	public void setWeaponList(Array<Weapon> wepList) // overwrite weapon list
-	{
-		weaponList = wepList;
-	}
-	public void setIngredientList(Array<ingredient> ingList) // overwrite ingredient list
-	{
-		ingredientList = ingList;
-	}
+	public Array<Weapon> getWeapons() { return weaponList; } // return weapon list
+	public void setWeaponList(Array<Weapon> wepList) { weaponList = wepList; } // overwrite weapon list
 	public Weapon getWeapon(int key) // return weapon at index, useful for hotkeys
 	{
 		if(key < weaponList.size())
@@ -63,33 +40,5 @@ public partial class inventory : Node3D
 		}
 		return false;
 	}
-	public bool removeIngredient(ingredient ig) // remove all of ingredient
-	{
-		int ind = ingredientList.find(ig);
-		if(ind != -1)
-		{
-			ingredientList.remove_At(ind);
-			return true;
-		}
-		return false;
-	}
-	public bool removeIngredient(ingredient ig, int num) // remove num of ingredient
-	{
-		int ind = ingredientList.find(ig);
-		if(ind != -1)
-		{
-			if(ingredientList[ind] > num) ingredientList[ind].increment(-num);
-			else ingredientList.remove_At(ind);
-			return true;
-		}
-		return false;
-	}
-	public int findIngredient(ingredient ig) // return index of ingredient
-	{
-		return ingredientList.find(ig);
-	}
-	public int findWeapon(Weapon wp) // return index of weapon
-	{
-		return weaponList.find(wp);
-	}
+	public int findWeapon(Weapon wp) { return weaponList.find(wp); } // return index of weapon
 }

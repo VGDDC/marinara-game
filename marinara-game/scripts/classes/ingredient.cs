@@ -6,7 +6,13 @@ public partial class ingredient : Node
 {
 	// list all ingredient options here
 	public Array<ingredient> allIngredients;
-	public int numOf = 1;
+	private int numOf;
+	private string name;
+	public ingredient(string name)
+	{
+		name = name;
+		numOf = 0;
+	}
 	
 	// returns a random ingredient object from full list of ingredients
 	public ingredient randomIngredient() {
@@ -20,10 +26,7 @@ public partial class ingredient : Node
 		
 		return option;
 	}
-	public void increment(int n) // adds n number of ingredients, use negatives to remove
-	{
-		numOf += n;
-	}
+	public void increment(int n)  { numOf += n; } // adds n number of ingredients, use negatives to remove
 	
 	// GETTERS
 	public ingredient getIngredient(int index) {return allIngredients[index];}
