@@ -11,6 +11,11 @@ public partial class root : Node
 	[Export]
 	public Node currentLevel;
 
+	public override void _Ready()
+	{
+		GD.Randomize();
+	}
+
 	public void LoadLevel(string id)
 	{
 

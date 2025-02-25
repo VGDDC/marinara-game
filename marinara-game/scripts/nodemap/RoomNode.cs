@@ -10,6 +10,7 @@ public partial class RoomNode : TextureButton
 	private string type;
 
 	private List<RoomNode> connections;
+	private bool connectedTo;
 	
 	private static root rootNode;
 
@@ -87,6 +88,10 @@ public partial class RoomNode : TextureButton
 
 	public bool HasConnectionTo(int rightY)
 	{
+		if (!Exists()) {
+			return false;
+		}
+		
 		for (int i = 0; i < connections.Count; i++) {
 			if (connections[i].GetY() == rightY) {
 				return true;
@@ -94,11 +99,27 @@ public partial class RoomNode : TextureButton
 		}
 		return false;
 	}
+	
+	public bool IsConnectedTo() {
+		return connectedTo;
+	}
+	
+	public bool HasConnectionFrom() {
+		return connections.Count > 0;
+	}
+
+	public List<RoomNode> GetConnections() {
+		return connections;
+	}
 
 	// Setters
 	public void SetType(string _type)
 	{
 		this.type = _type;
+	}
+	
+	public void SetConnectedTo(bool new_value) {
+		connectedTo = new_value;
 	}
 
 
@@ -106,6 +127,14 @@ public partial class RoomNode : TextureButton
 		var tempNode = (NodeMap) GetParent();
 		rootNode = (root) tempNode.GetParent();
 		rootNode.LoadLevel(this.type);
+	}
+
+	public void ClearConnections() {
+		connections = new List<RoomNode>();
+	}
+	
+	public void ClearConnectedTo() {
+		connectedTo = false;
 	}
 	
 	// Dunder Zone
