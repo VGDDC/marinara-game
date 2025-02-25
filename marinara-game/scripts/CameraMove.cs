@@ -15,6 +15,7 @@ public partial class CameraMove : Camera3D
 	public override void _Ready()
 	{
 		followCam = true;
+		targetNode = (Node3D)GetParent().GetNode("Player");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

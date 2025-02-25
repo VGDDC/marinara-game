@@ -10,6 +10,7 @@ public partial class Weapon : GodotObject
 	private bool autoFire; //Determines if a weapon is automatic (1) or semi-automatic (0)
 	private float downTime; //Downtime after using a weapon before the player can switch or attack again
 	private int projectileCount; //Number of hurtboxes/projectiles spawned by attacking a single time
+	private float shotSpread; //Degrees angle in which a weapon can fire in. Firing weapons will spawn projectiles traveling in a positive/negative degree from player aim
 
 	private PackedScene bullet; //Scene object with the default projectile fired by this weapon.
 	private float damage; //Damage dealt by an individual projectile or swing of this weapon
@@ -31,6 +32,7 @@ public partial class Weapon : GodotObject
 	///<param name="_autoFire"> bool passed in for the weapon's "autoFire" </param>
 	///<param name="_downTime"> float passed in for the weapon's "downTime" </param>
 	///<param name="_projectileCount"> int passed in for the weapon's "projectileCount" </param>
+	///<param name="_shotSpread"> int passed in for the weapon's "shotSpread" </param>
 	///<param name="_damage"> float passed in for the weapon's damage value </param>
 	///<param name="_lifeTime"> float passed in for the weapon's "lifeTime" </param>
 	///<param name="_instantVelocity"> float passed in for the weapon's "instantVelocity" </param>
@@ -40,12 +42,13 @@ public partial class Weapon : GodotObject
 	///<param name="spritePath"> string representation of file path leading to the texture that will be used for "weaponSprite" </param>
 	///<param name="bulletPath"> string representation of file path leading to the scene that will be used for "bullet" </param>
 	///</summary>
-	Weapon(string _name, bool _autoFire, float _downTime, int _projectileCount, float _damage, float _lifeTime, float _instantVelocity, int _useCost, int _maxUses, /*Ingredient[] iList,*/ string spritePath, string bulletPath) {
+	Weapon(string _name, bool _autoFire, float _downTime, int _projectileCount, float _shotSpread, float _damage, float _lifeTime, float _instantVelocity, int _useCost, int _maxUses, /*Ingredient[] iList,*/ string spritePath, string bulletPath) {
 		//Instantiate variables
 		name = _name;
 		autoFire = _autoFire;
 		downTime = _downTime;
 		projectileCount = _projectileCount;
+		shotSpread = _shotSpread;
 		damage = _damage;
 		lifeTime = _lifeTime;
 		instantVelocity = _instantVelocity;
@@ -58,9 +61,12 @@ public partial class Weapon : GodotObject
 
 		//Apply Secondary Ingredient modifiers
 		//SUGGESTION: each Secondary Ingredient class/struct should have a "applyStats()" type of function that modifies the weapon's stats.
+		//If this is not possible, perhaps an "ItemModifier" struct/class that stores a float "statMultiplier", int "statBonus", and a string/int/enum to determine what stat is modified.
+		//An item could have an array/list of "ItemModifier" and have that be how we determine how it is edited.
 		/*
 		foreach(Ingredient i in iList) {
-			//code goes here
+			//TO-DO: implement function to recognize what an ingredient modifies and modify weapon
+
 			healMod += 0.05;
 		}
 		*/
@@ -75,6 +81,7 @@ public partial class Weapon : GodotObject
 	public float getDownTime() {return downTime;}
 	public int getProjectileCount() {return projectileCount;}
 	//TO-DO: get bullet?
+	public float getShotSpread() {return shotSpread;}
 	public float getDamage() {return damage;}
 	public float getLifeTime() {return lifeTime;}
 	public float getInstantVelocity() {return instantVelocity;}
@@ -97,19 +104,25 @@ public partial class Weapon : GodotObject
 	}
 
 	//TO-DO: Shoot function - Prerequisite: bullet Scene needs to be made properly.
-	/*public void fireWeapon() {
+	/*public void fireWeapon() { //may have to read in a status effect (i.e. weakness) as a parameter
+		for(int i=0; i<projectileCount; i++) {
+			Node newBullet = instantiate(bullet);
+			newBullet.Bullet.setStats(damage, lifeTime, instantVelocity);
+			//TO-DO: pass in player transform for bullet
+			//TO-DO: pass in base angle of fire (based on raycast from player to cursor)
+			//TO-DO: generate degree offset to modify the bullet's starting position.
+		}
 		expendUse(useCost);
-		Node newBullet = instantiate(bullet);
-		newBullet.Bullet.setStats([INSERT PARAMETERS BEING PASSED]);
 	}*/
 	
 	///<summary>
-	///<param name="value"=1> Number of uses being expended by an action of this weapon
+	///<param name="value"=1> Number of uses being expended by an action of this weapon.
 	///</summary>
 	private void expendUse(int value = 1) {
 		uses -= value;
 		//if (uses<=0)
-		//Destroy or otherwise delete this item? Probably will need to call a delete function in a parent class or something?
+		//Destroy or otherwise delete this item? Probably will need to call/signal a delete function in a parent class or something?
+		//NOTE: destroying an empty with no uses left should only be performed after all other functions involving a weapon.
 	}
 
 }
