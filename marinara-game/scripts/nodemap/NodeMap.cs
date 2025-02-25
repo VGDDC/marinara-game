@@ -37,11 +37,11 @@ public partial class NodeMap : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionJustPressed("move_down"))
-		{
-			var tempNode = (root) GetParent();
-			tempNode.ResetNodeMap();
-		}
+		//if (Input.IsActionJustPressed("move_down"))
+		//{
+		//	var tempNode = (root) GetParent();
+		//	tempNode.ResetNodeMap();
+		//}
 	}
 
 	//========================================================
@@ -380,10 +380,10 @@ public partial class NodeMap : Node
 				}
 
 				if (!ConnectionValid(nodeMap[leftIdx, iL], nodeMap[rightIdx, iR])) {
-					GD.Print("++++++++++");
-					GD.Print(leftIdx.ToString() + ", " + iL.ToString());
-					GD.Print(rightIdx.ToString() + ", " + iR.ToString());
-					GD.Print("++++++++++");
+					//GD.Print("++++++++++");
+					//GD.Print(leftIdx.ToString() + ", " + iL.ToString());
+					//GD.Print(rightIdx.ToString() + ", " + iR.ToString());
+					//GD.Print("++++++++++");
 					continue;
 				}
 
@@ -416,7 +416,7 @@ public partial class NodeMap : Node
 	private bool ConnectionValid(RoomNode nodeL, RoomNode nodeR)
 	{
 		if (!nodeL.Exists() || !nodeR.Exists()) {
-			GD.Print("Throw 3");
+			//GD.Print("Throw 3");
 			return false;
 		}
 
@@ -427,7 +427,7 @@ public partial class NodeMap : Node
 		if (nodeR.GetY() == (nodeL.GetY()-1)) {
 			if (nodeL.GetY() != 0) {
 				if (nodeMap[nodeL.GetX(), nodeL.GetY()-1].HasConnectionTo(nodeL.GetY())) {
-					GD.Print("Throw 1");
+					//GD.Print("Throw 1");
 					return false;
 				}
 			}
@@ -436,7 +436,7 @@ public partial class NodeMap : Node
 		if (nodeR.GetY() == (nodeL.GetY()+1)) {
 			if (nodeL.GetY() != 4) {
 				if (nodeMap[nodeL.GetX(), nodeL.GetY()+1].HasConnectionTo(nodeL.GetY())) {
-					GD.Print("Throw 2");
+					//GD.Print("Throw 2");
 					return false;
 				}
 			}
