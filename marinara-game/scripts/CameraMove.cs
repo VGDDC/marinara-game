@@ -8,7 +8,14 @@ public partial class CameraMove : Camera3D
 	[Export]
 	public Node3D targetNode {get; set; } //Node object which the camera will follow at an offset
 	
-	public Vector3 offset = new Vector3(0.0f,3.3f,3.3f); //Offset position from targetNode
+	[Export]
+	public float x;
+	[Export]
+	public float y;
+	[Export]
+	public float z;
+	
+	public Vector3 offset = new Vector3(0.0f,7.0f,3.0f); //Offset position from targetNode
 	
 	
 	// Called when the node enters the scene tree for the first time.
@@ -23,7 +30,8 @@ public partial class CameraMove : Camera3D
 	{
 		if (followCam)
 		{
-			Vector3 pos = targetNode.GlobalPosition + offset;
+			Vector3 offsetTest = new Vector3(x, y, z);
+			Vector3 pos = targetNode.GlobalPosition + offsetTest;
 			GlobalPosition = pos;
 		}
 	}

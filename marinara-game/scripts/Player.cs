@@ -31,7 +31,7 @@ public partial class Player : CharacterBody3D
 		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
 		if (direction != Vector3.Zero)
 		{
-			velocity.X = direction.X * moveSpeed;
+			velocity.X = direction.X * moveSpeed * 1.2f;
 			velocity.Z = direction.Z * moveSpeed;
 		}
 		else
