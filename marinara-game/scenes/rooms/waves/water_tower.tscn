@@ -44,7 +44,7 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_mrlt4")
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 2, 2.14432, 3.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.14432, 3.5)
 slide_on_ceiling = false
 script = ExtResource("3_r1dii")
 
@@ -72,7 +72,7 @@ texture = ExtResource("5_xe5kv")
 transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906307, 0, -0.906307, 0.422618, 3, 2, 0)
 fov = 85.0
 script = ExtResource("6_jc1cb")
-y = 5.0
+y = 6.0
 z = 3.0
 
 [node name="Enemy" type="CharacterBody3D" parent="."]
