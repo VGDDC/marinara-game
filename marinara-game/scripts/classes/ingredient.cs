@@ -27,10 +27,9 @@ public partial class ingredient : Node
 		return option;
 	}
 	public void increment(int n)  { numOf += n; } // adds n number of ingredients, use negatives to remove
-	public void removeAll()
-	{
-		numOf = 0;
-	}
-	// GETTERS
+	public int getNumOf() { return numOf; }
+	public string getName() { return name; }
+	public void setName(string n) { name = n; }
+	public void removeAll() { numOf = 0; }// sets number of ingredients to zero
 	public ingredient getIngredient(int index) {return allIngredients[index];}
 }

@@ -16,7 +16,7 @@ public partial class inventory : Node3D
 		weaponList = new List<Weapon>();
 	}
 	public int getCarrots() { return goldCarrots; }
-	public void setCarrots(int i) { goldCarrots = i; }
+	public void setCarrots(int i) { goldCarrots = i; }  // methods for gold carrots (money)
 	public void incrementCarrots(int i) { goldCarrots += i; }
 	public bool addWeapon(Weapon wep) // add weapon to list, return false if already has 4 weapons
 	{
@@ -50,8 +50,8 @@ public partial class inventory : Node3D
 		return false;
 	}
 	public int findWeapon(Weapon wp) { return weaponList.IndexOf(wp); } // return index of weapon
-	public int findSubIngredient(ingredient ig) { return subIngList.IndexOf(ig); }
-	public int findMainIngredient(ingredient ig) { return mainIngList.IndexOf(ig); }
+	public int findSubIngredient(ingredient ig) { return subIngList.IndexOf(ig); } // returns index of an ingredient
+	public int findMainIngredient(ingredient ig) { return mainIngList.IndexOf(ig); } // returns index of an ingredient
 	public void addIngredient(ingredient i, int num) {
 		if(mainIngList.Contains(i))
 		{
@@ -62,7 +62,7 @@ public partial class inventory : Node3D
 			subIngList[subIngList.IndexOf(i)].increment(num);
 		}
 	}
-	public void removeIngredient(ingredient i) {
+	public void removeIngredient(ingredient i) { // removes all of an ingredient
 		if(mainIngList.Contains(i))
 		{
 			mainIngList[mainIngList.IndexOf(i)].removeAll();
@@ -72,7 +72,7 @@ public partial class inventory : Node3D
 			subIngList[subIngList.IndexOf(i)].removeAll();
 		}
 	}
-	public void removeIngredient(ingredient i, int num)
+	public void removeIngredient(ingredient i, int num) // removes num amount of an ingredient
 	{
 		if(mainIngList.Contains(i))
 		{
@@ -83,19 +83,19 @@ public partial class inventory : Node3D
 			subIngList[subIngList.IndexOf(i)].increment(-num);
 		}
 	}
-	public ingredient getMainIngredient(int key) {
+	public ingredient getMainIngredient(int key) { // gets a main ingredient based of it's index
 		if(mainIngList.Count < key) return mainIngList[key];
 		return null;
 	}
-	public ingredient getSubIngredient(int key) {
-		if(subIngListIngList.Count < key) return subIngList[key];
+	public ingredient getSubIngredient(int key) { // gets a sub ingredient based of it's index
+		if(subIngList.Count < key) return subIngList[key];
 		return null;
 	}
 	public List<int> getMainNums() { // returns how many of each main ingredient you have in a list of integers
 		List<int> nums = new List<int>();
 		for(int i = 0; i < mainIngList.Count; i ++)
 		{
-			nums.Add(mainIngList[i].numOf);
+			nums.Add(mainIngList[i].getNumOf());
 		}
 		return nums;
 	}
@@ -103,8 +103,26 @@ public partial class inventory : Node3D
 		List<int> nums = new List<int>();
 		for(int i = 0; i < subIngList.Count; i ++)
 		{
-			nums.Add(subIngList[i].numOf);
+			nums.Add(subIngList[i].getNumOf());
 		}
 		return nums;
+	}
+	public List<string> getMainNames() // returns the name of every main ingredient in the list
+	{
+		List<string> names = new List<string>();
+		for (int i = 0; i < mainIngList.Count; i ++)
+		{
+			names.Add(mainIngList[i].getName())
+		}
+		return names;
+	}
+	public List<string> getSubNames() // returns the name of every sub ingredient in the list
+	{
+		List<string> names = new List<string>();
+		for (int i = 0; i < subIngList.Count; i ++)
+		{
+			names.Add(subIngList[i].getName())
+		}
+		return names;
 	}
 }
