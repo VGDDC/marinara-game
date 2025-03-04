@@ -16,4 +16,3 @@ script = ExtResource("1_8d4ts")
 [node name="TestLevel" parent="." instance=ExtResource("2_fusyx")]
 
 [node name="nodemap" parent="." instance=ExtResource("4_cqcdd")]
-visible = false
