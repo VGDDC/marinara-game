@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://5hilxerswed0"]
+
+[ext_resource type="PackedScene" uid="uid://bm20vl7c67mlw" path="res://models/3D/mothman/scene.gltf" id="1_5vw51"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1mj28"]
+
+[node name="scene" instance=ExtResource("1_5vw51")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, -2.8213e-07, 1, 0, -1, -2.8213e-07, 0, 0.919055, 2.04071e-16)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_1mj28")
+
+[node name="Skeleton3D" parent="Sketchfab_model/mothman_psx_fbx/RootNode/Armature/Object_4" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00970924, -0.0034492, -0.00924861)

@@ -1,10 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://pp62id7b73pr"]
+[gd_scene load_steps=13 format=3 uid="uid://pp62id7b73pr"]
 
 [ext_resource type="Texture2D" uid="uid://bwokxhenkfk0e" path="res://sprites/Wood floor.png" id="1_r2oj7"]
-[ext_resource type="Script" path="res://scripts/Player.cs" id="3_r1dii"]
-[ext_resource type="Texture2D" uid="uid://d2m0lh3pudv47" path="res://sprites/player_character/temp_player.png" id="4_bahj5"]
-[ext_resource type="Texture2D" uid="uid://403hwlngvsuj" path="res://sprites/player_character/temp_weapon.png" id="5_xe5kv"]
+[ext_resource type="PackedScene" uid="uid://bceqtawhhvwk1" path="res://scenes/player.tscn" id="2_xm2ht"]
 [ext_resource type="Script" path="res://scripts/CameraMove.cs" id="6_jc1cb"]
+[ext_resource type="PackedScene" uid="uid://5hilxerswed0" path="res://models/3D/mothman/mothman.tscn" id="7_nb5u6"]
 [ext_resource type="Texture2D" uid="uid://pbqgyyusjo3g" path="res://sprites/enemy_character/enemy_sprite.png" id="7_pyv8f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dnbgb"]
@@ -18,9 +17,6 @@ size = Vector3(33, 1, 22)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mrlt4"]
 size = Vector3(33, 1, 22)
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_hw5gi"]
-height = 4.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_qef5k"]
 height = 4.26376
@@ -43,30 +39,8 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 shape = SubResource("BoxShape3D_mrlt4")
 
-[node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.14432, 3.5)
-slide_on_ceiling = false
-script = ExtResource("3_r1dii")
-
-[node name="Pivot" type="Node3D" parent="Player"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(0.6, 0, 0, 0, 0.3, 0, 0, 0, 0.6, 0, 0, 0)
-shape = SubResource("CylinderShape3D_hw5gi")
-
-[node name="Sprite3D" type="Sprite3D" parent="Player"]
-pixel_size = 0.02
-billboard = 1
-texture_filter = 0
-texture = ExtResource("4_bahj5")
-
-[node name="Weapon" type="Node3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.364, 0.15, 0.05)
-
-[node name="Sprite3D" type="Sprite3D" parent="Player/Weapon"]
-billboard = 1
-texture_filter = 0
-texture = ExtResource("5_xe5kv")
+[node name="Player" parent="." instance=ExtResource("2_xm2ht")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.38749, 4.61157, 6.51761)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906307, 0, -0.906307, 0.422618, 3, 2, 0)
@@ -76,7 +50,7 @@ y = 6.0
 z = 3.0
 
 [node name="Enemy" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.6, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.99305, 1.6, 0)
 
 [node name="Sprite3D" type="Sprite3D" parent="Enemy"]
 pixel_size = 0.02
@@ -85,7 +59,7 @@ texture_filter = 0
 texture = ExtResource("7_pyv8f")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy"]
-transform = Transform3D(0.6, 0, 0, 0, 0.3, 0, 0, 0, 0.6, 0, 0, 0)
+transform = Transform3D(0.6, 0, 0, 0, 0.3, 0, 0, 0, 0.6, 2.5287, 0, 0)
 shape = SubResource("CylinderShape3D_qef5k")
 
 [node name="Left Wall WIP" type="StaticBody3D" parent="."]
@@ -102,7 +76,6 @@ shape = SubResource("BoxShape3D_s42n5")
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 2, 0, 11, -100)
 
 [node name="TestFloor" type="MeshInstance3D" parent="Back Wall WIP"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_4q2ug")
 skeleton = NodePath("../..")
 
@@ -126,6 +99,9 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_s42n5")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.178228, 4.09926, 0.168549)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.178228, 8.87552, 6.15653)
 light_energy = 5.0
 omni_range = 30.0
+
+[node name="scene" parent="." instance=ExtResource("7_nb5u6")]
+transform = Transform3D(-3.0598e-07, 7, 3.0598e-07, 0, -3.0598e-07, 7, 7, 3.0598e-07, 1.33748e-14, -5.66888, 1.56694, 0.186004)

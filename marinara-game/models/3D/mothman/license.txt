@@ -1,0 +1,11 @@
+Model Information:
+* title:	MOTHMAN PSX RIGGED
+* source:	https://sketchfab.com/3d-models/mothman-psx-rigged-a8185f7220214b36a2e0a3717fdbea1b
+* author:	projektsansstudios (https://sketchfab.com/projektsansstudios)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "MOTHMAN PSX RIGGED" (https://sketchfab.com/3d-models/mothman-psx-rigged-a8185f7220214b36a2e0a3717fdbea1b) by projektsansstudios (https://sketchfab.com/projektsansstudios) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

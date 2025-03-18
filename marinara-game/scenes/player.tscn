@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://bceqtawhhvwk1"]
+
+[ext_resource type="Script" path="res://scripts/Player.cs" id="1_2w3sy"]
+[ext_resource type="Texture2D" uid="uid://d2m0lh3pudv47" path="res://sprites/player_character/temp_player.png" id="2_phbev"]
+[ext_resource type="Texture2D" uid="uid://403hwlngvsuj" path="res://sprites/player_character/temp_weapon.png" id="3_5ji0s"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_hw5gi"]
+height = 4.0
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.035512, 0.0101399, -0.0101373)
+slide_on_ceiling = false
+safe_margin = 0.01
+script = ExtResource("1_2w3sy")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+shape = SubResource("CylinderShape3D_hw5gi")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.02
+billboard = 1
+texture_filter = 0
+texture = ExtResource("2_phbev")
+
+[node name="Weapon" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.364, 0.15, 0.05)
+
+[node name="Sprite3D" type="Sprite3D" parent="Weapon"]
+billboard = 1
+texture_filter = 0
+texture = ExtResource("3_5ji0s")
