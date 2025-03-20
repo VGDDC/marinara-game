@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://pp62id7b73pr"]
+[gd_scene load_steps=14 format=3 uid="uid://pp62id7b73pr"]
 
 [ext_resource type="Texture2D" uid="uid://bwokxhenkfk0e" path="res://sprites/Wood floor.png" id="1_r2oj7"]
 [ext_resource type="PackedScene" uid="uid://bceqtawhhvwk1" path="res://scenes/player.tscn" id="2_xm2ht"]
 [ext_resource type="Script" path="res://scripts/CameraMove.cs" id="6_jc1cb"]
+[ext_resource type="PackedScene" uid="uid://s77col4wfydm" path="res://scenes/food_truck/food_truck_exterior.tscn" id="6_kxmsq"]
 [ext_resource type="PackedScene" uid="uid://5hilxerswed0" path="res://models/3D/mothman/mothman.tscn" id="7_nb5u6"]
 [ext_resource type="Texture2D" uid="uid://pbqgyyusjo3g" path="res://sprites/enemy_character/enemy_sprite.png" id="7_pyv8f"]
 
@@ -105,3 +106,6 @@ omni_range = 30.0
 
 [node name="scene" parent="." instance=ExtResource("7_nb5u6")]
 transform = Transform3D(-3.0598e-07, 7, 3.0598e-07, 0, -3.0598e-07, 7, 7, 3.0598e-07, 1.33748e-14, -5.66888, 1.56694, 0.186004)
+
+[node name="food_truck_exterior" parent="." instance=ExtResource("6_kxmsq")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, 1, 0, 4.37114e-08, -12.6485, 0.5, 8.04894)

@@ -1,3 +1,8 @@
-[gd_scene format=3 uid="uid://c2ibalt54n1cx"]
+[gd_scene load_steps=2 format=3 uid="uid://c2ibalt54n1cx"]
+
+[ext_resource type="ArrayMesh" uid="uid://bwiot0bkaq4lr" path="res://models/3D/test_floor.obj" id="1_8o70r"]
 
 [node name="food_truck" type="Node3D"]
+
+[node name="TestFloor" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_8o70r")

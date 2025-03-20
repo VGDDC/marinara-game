@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bx8rxj4h2fng4"
+path="res://.godot/imported/Truck.obj-4c02be6e8f4c8875fd0580c54d492816.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Truck.obj-4c02be6e8f4c8875fd0580c54d492816.mesh"]
+
+source_file="res://models/3D/Food Truck/Truck.obj"
+dest_files=["res://.godot/imported/Truck.obj-4c02be6e8f4c8875fd0580c54d492816.mesh", "res://.godot/imported/Truck.obj-4c02be6e8f4c8875fd0580c54d492816.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

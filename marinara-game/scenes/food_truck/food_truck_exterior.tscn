@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://s77col4wfydm"]
+
+[ext_resource type="Texture2D" uid="uid://blf28qi6rjo8y" path="res://models/3D/Food Truck/colorspixelated.png" id="1_yjprr"]
+[ext_resource type="ArrayMesh" uid="uid://bx8rxj4h2fng4" path="res://models/3D/Food Truck/Truck.obj" id="2_8l86x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j7o8k"]
+albedo_texture = ExtResource("1_yjprr")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t1ufl"]
+size = Vector3(2.87, 2.49029, 5.46481)
+
+[node name="food_truck_exterior" type="Node3D"]
+
+[node name="Truck" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_j7o8k")
+mesh = ExtResource("2_8l86x")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.01584, -0.304749)
+shape = SubResource("BoxShape3D_t1ufl")
