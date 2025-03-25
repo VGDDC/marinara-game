@@ -112,7 +112,7 @@ public partial class inventory : Node3D
 		List<string> names = new List<string>();
 		for (int i = 0; i < mainIngList.Count; i ++)
 		{
-			names.Add(mainIngList[i].getName())
+			names.Add(mainIngList[i].getName());
 		}
 		return names;
 	}
@@ -121,7 +121,7 @@ public partial class inventory : Node3D
 		List<string> names = new List<string>();
 		for (int i = 0; i < subIngList.Count; i ++)
 		{
-			names.Add(subIngList[i].getName())
+			names.Add(subIngList[i].getName());
 		}
 		return names;
 	}
