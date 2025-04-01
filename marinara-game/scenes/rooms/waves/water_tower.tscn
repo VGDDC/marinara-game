@@ -1,19 +1,21 @@
-[gd_scene load_steps=14 format=3 uid="uid://pp62id7b73pr"]
+[gd_scene load_steps=15 format=3 uid="uid://pp62id7b73pr"]
 
 [ext_resource type="Texture2D" uid="uid://bwokxhenkfk0e" path="res://sprites/Wood floor.png" id="1_r2oj7"]
 [ext_resource type="PackedScene" uid="uid://bceqtawhhvwk1" path="res://scenes/player.tscn" id="2_xm2ht"]
 [ext_resource type="Script" path="res://scripts/CameraMove.cs" id="6_jc1cb"]
 [ext_resource type="PackedScene" uid="uid://s77col4wfydm" path="res://scenes/food_truck/food_truck_exterior.tscn" id="6_kxmsq"]
+[ext_resource type="PackedScene" uid="uid://cjc8o8enjkphq" path="res://scenes/food_truck/foodtruck_door.tscn" id="7_251ef"]
 [ext_resource type="PackedScene" uid="uid://5hilxerswed0" path="res://models/3D/mothman/mothman.tscn" id="7_nb5u6"]
 [ext_resource type="Texture2D" uid="uid://pbqgyyusjo3g" path="res://sprites/enemy_character/enemy_sprite.png" id="7_pyv8f"]
+[ext_resource type="PackedScene" uid="uid://c2ibalt54n1cx" path="res://scenes/food_truck/food_truck.tscn" id="8_cm5eh"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dnbgb"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1sdg"]
 albedo_texture = ExtResource("1_r2oj7")
 uv1_scale = Vector3(6.97, 6.97, 6.97)
 texture_filter = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_oj38g"]
-material = SubResource("StandardMaterial3D_dnbgb")
+material = SubResource("StandardMaterial3D_b1sdg")
 size = Vector3(33, 1, 22)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mrlt4"]
@@ -27,8 +29,6 @@ height = 4.26376
 [sub_resource type="BoxShape3D" id="BoxShape3D_s42n5"]
 size = Vector3(22, 1, 19)
 
-[sub_resource type="BoxMesh" id="BoxMesh_hkmvt"]
-
 [node name="water_tower" type="Node3D"]
 
 [node name="Ground" type="StaticBody3D" parent="."]
@@ -41,7 +41,7 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_mrlt4")
 
 [node name="Player" parent="." instance=ExtResource("2_xm2ht")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.38749, 4.61157, 6.51761)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.72968, -97.9656, 3.14924)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906307, 0, -0.906307, 0.422618, 3, 2, 0)
@@ -89,16 +89,6 @@ transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 2, 0, 11, 100)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Front Wall WIP"]
 shape = SubResource("BoxShape3D_s42n5")
 
-[node name="Right Wall WIP" type="StaticBody3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 20, 0, 0, 0, 20, 100, 11, 0)
-
-[node name="TestFloor" type="MeshInstance3D" parent="Right Wall WIP"]
-mesh = SubResource("BoxMesh_hkmvt")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Right Wall WIP"]
-shape = SubResource("BoxShape3D_s42n5")
-
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.178228, 8.87552, 6.15653)
 light_energy = 5.0
@@ -109,3 +99,16 @@ transform = Transform3D(-3.0598e-07, 7, 3.0598e-07, 0, -3.0598e-07, 7, 7, 3.0598
 
 [node name="food_truck_exterior" parent="." instance=ExtResource("6_kxmsq")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, 1, 0, 4.37114e-08, -12.6485, 0.5, 8.04894)
+
+[node name="Node" type="Node" parent="food_truck_exterior"]
+
+[node name="Exit" type="Node3D" parent="food_truck_exterior/Node"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, 1, 0, 4.37114e-08, -8.57111, 1.94446, 8.04894)
+
+[node name="Door" parent="." node_paths=PackedStringArray("player", "destination") instance=ExtResource("7_251ef")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.75264, -98.4837, 0.528371)
+player = NodePath("../Player")
+destination = NodePath("../food_truck_exterior/Node/Exit")
+
+[node name="food_truck" parent="." instance=ExtResource("8_cm5eh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100, 0)

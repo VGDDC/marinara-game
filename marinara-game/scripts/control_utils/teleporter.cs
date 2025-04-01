@@ -3,16 +3,23 @@ using System;
 
 public partial class teleporter : Node3D
 {
-	private Area3D collisionArea;
+	[Export] public Area3D collisionArea;
+	[Export] public CharacterBody3D player;
+	[Export] public Node3D destination;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		//collisionArea = GD.Get
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if (collisionArea.OverlapsBody(player)) {
+			if (Input.IsActionJustPressed("interact")) {
+				player.Position = destination.Position;
+			}
+		}
 	}
 }
