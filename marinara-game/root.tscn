@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://fg6587y5oyoq"]
+[gd_scene load_steps=6 format=3 uid="uid://fg6587y5oyoq"]
 
 [ext_resource type="Script" path="res://scripts/inventory.cs" id="1_8d4ts"]
 [ext_resource type="Script" path="res://root.cs" id="1_cg4g8"]
 [ext_resource type="PackedScene" uid="uid://cug16bnc880xh" path="res://scenes/map_core.tscn" id="2_fusyx"]
+[ext_resource type="Script" path="res://Inv_UI.cs" id="3_4ybtd"]
 [ext_resource type="PackedScene" uid="uid://bi2bodp3hrdmt" path="res://scenes/nodemap/nodemap.tscn" id="4_cqcdd"]
 
 [node name="Root" type="Node3D" node_paths=PackedStringArray("nodeMap", "currentLevel")]
@@ -12,6 +13,26 @@ currentLevel = NodePath("TestLevel")
 
 [node name="inventory" type="Node3D" parent="."]
 script = ExtResource("1_8d4ts")
+
+[node name="Inv_UI" type="Control" parent="inventory"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1279.0
+offset_bottom = 717.0
+script = ExtResource("3_4ybtd")
+
+[node name="TabBar" type="TabBar" parent="inventory/Inv_UI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+tab_count = 1
+tab_0/title = "Tab"
+
+[node name="ColorRect" type="ColorRect" parent="inventory/Inv_UI"]
+z_index = -15
+layout_mode = 0
+offset_right = 1275.0
+offset_bottom = 717.0
 
 [node name="TestLevel" parent="." instance=ExtResource("2_fusyx")]
 
