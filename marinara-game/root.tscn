@@ -1,10 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://fg6587y5oyoq"]
+[gd_scene load_steps=7 format=3 uid="uid://fg6587y5oyoq"]
 
 [ext_resource type="Script" path="res://scripts/inventory.cs" id="1_8d4ts"]
 [ext_resource type="Script" path="res://root.cs" id="1_cg4g8"]
 [ext_resource type="PackedScene" uid="uid://cug16bnc880xh" path="res://scenes/map_core.tscn" id="2_fusyx"]
 [ext_resource type="Script" path="res://Inv_UI.cs" id="3_4ybtd"]
 [ext_resource type="PackedScene" uid="uid://bi2bodp3hrdmt" path="res://scenes/nodemap/nodemap.tscn" id="4_cqcdd"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_8q06p"]
+script/source = "using Godot;
+using System;
+
+public partial class MoneyCounter : RichTextLabel
+{
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+	}
+
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+	}
+}
+"
 
 [node name="Root" type="Node3D" node_paths=PackedStringArray("nodeMap", "currentLevel")]
 script = ExtResource("1_cg4g8")
@@ -23,17 +41,32 @@ script = ExtResource("3_4ybtd")
 
 [node name="TabBar" type="TabBar" parent="inventory/Inv_UI"]
 layout_mode = 0
-offset_right = 40.0
+offset_left = 160.74
+offset_right = 545.74
 offset_bottom = 40.0
-tab_count = 1
-tab_0/title = "Tab"
+clip_tabs = false
+tab_count = 3
+tab_0/title = "Weapons"
+tab_1/title = "Main Ingredients"
+tab_2/title = "Sub Ingredients"
 
-[node name="ColorRect" type="ColorRect" parent="inventory/Inv_UI"]
-z_index = -15
-layout_mode = 0
-offset_right = 1275.0
-offset_bottom = 717.0
+[node name="MoneyCounter" type="RichTextLabel" parent="inventory/Inv_UI"]
+z_as_relative = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.12
+anchor_bottom = 0.056
+offset_left = 223.0
+offset_top = 59.0
+offset_right = 320.52
+offset_bottom = 58.848
+text = "Golden Carrots: 99999/10000000"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = SubResource("CSharpScript_8q06p")
 
 [node name="TestLevel" parent="." instance=ExtResource("2_fusyx")]
 
 [node name="nodemap" parent="." instance=ExtResource("4_cqcdd")]
+visible = false
