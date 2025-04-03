@@ -37,3 +37,4 @@ offset_bottom = 717.0
 [node name="TestLevel" parent="." instance=ExtResource("2_fusyx")]
 
 [node name="nodemap" parent="." instance=ExtResource("4_cqcdd")]
+visible = false

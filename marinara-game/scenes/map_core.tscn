@@ -68,6 +68,8 @@ texture = ExtResource("4_82glr")
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.392626, 2.53083, 5.51121)
 script = ExtResource("5_l5gto")
 targetNode = NodePath("../Player")
+y = 5.0
+z = 5.0
 
 [node name="Enemy" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.6, 0)
