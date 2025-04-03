@@ -37,11 +37,11 @@ public partial class NodeMap : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		//if (Input.IsActionJustPressed("move_down"))
-		//{
-		//	var tempNode = (root) GetParent();
-		//	tempNode.ResetNodeMap();
-		//}
+		if (Input.IsActionJustPressed("move_down"))
+		{
+			var tempNode = (root) GetParent();
+			tempNode.ResetNodeMap();
+		}
 	}
 
 	//========================================================

@@ -7,13 +7,13 @@
 [ext_resource type="Script" path="res://scripts/CameraMove.cs" id="5_l5gto"]
 [ext_resource type="Texture2D" uid="uid://pbqgyyusjo3g" path="res://sprites/enemy_character/enemy_sprite.png" id="5_prm6p"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dnbgb"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c2pq8"]
 albedo_texture = ExtResource("1_oqi10")
 uv1_scale = Vector3(6.97, 6.97, 6.97)
 texture_filter = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_tofkr"]
-material = SubResource("StandardMaterial3D_dnbgb")
+material = SubResource("StandardMaterial3D_c2pq8")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5dq7a"]
 

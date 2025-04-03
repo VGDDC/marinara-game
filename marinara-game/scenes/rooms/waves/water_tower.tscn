@@ -1,76 +1,57 @@
-[gd_scene load_steps=14 format=3 uid="uid://pp62id7b73pr"]
+[gd_scene load_steps=15 format=3 uid="uid://pp62id7b73pr"]
 
 [ext_resource type="Texture2D" uid="uid://bwokxhenkfk0e" path="res://sprites/Wood floor.png" id="1_r2oj7"]
-[ext_resource type="Script" path="res://scripts/Player.cs" id="3_r1dii"]
-[ext_resource type="Texture2D" uid="uid://d2m0lh3pudv47" path="res://sprites/player_character/temp_player.png" id="4_bahj5"]
-[ext_resource type="Texture2D" uid="uid://403hwlngvsuj" path="res://sprites/player_character/temp_weapon.png" id="5_xe5kv"]
+[ext_resource type="PackedScene" uid="uid://bceqtawhhvwk1" path="res://scenes/player.tscn" id="2_xm2ht"]
 [ext_resource type="Script" path="res://scripts/CameraMove.cs" id="6_jc1cb"]
+[ext_resource type="PackedScene" uid="uid://s77col4wfydm" path="res://scenes/food_truck/food_truck_exterior.tscn" id="6_kxmsq"]
+[ext_resource type="PackedScene" uid="uid://cjc8o8enjkphq" path="res://scenes/food_truck/foodtruck_door.tscn" id="7_251ef"]
+[ext_resource type="PackedScene" uid="uid://5hilxerswed0" path="res://models/3D/mothman/mothman.tscn" id="7_nb5u6"]
 [ext_resource type="Texture2D" uid="uid://pbqgyyusjo3g" path="res://sprites/enemy_character/enemy_sprite.png" id="7_pyv8f"]
+[ext_resource type="PackedScene" uid="uid://c2ibalt54n1cx" path="res://scenes/food_truck/food_truck.tscn" id="8_cm5eh"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kodhm"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1sdg"]
 albedo_texture = ExtResource("1_r2oj7")
 uv1_scale = Vector3(6.97, 6.97, 6.97)
 texture_filter = 0
 
-[sub_resource type="BoxMesh" id="BoxMesh_lb3ev"]
-material = SubResource("StandardMaterial3D_kodhm")
+[sub_resource type="BoxMesh" id="BoxMesh_oj38g"]
+material = SubResource("StandardMaterial3D_b1sdg")
+size = Vector3(33, 1, 22)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_s42n5"]
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_hw5gi"]
-height = 4.0
+[sub_resource type="BoxShape3D" id="BoxShape3D_mrlt4"]
+size = Vector3(33, 1, 22)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_qef5k"]
 height = 4.26376
 
 [sub_resource type="BoxMesh" id="BoxMesh_4q2ug"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_hkmvt"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_s42n5"]
+size = Vector3(22, 1, 19)
 
 [node name="water_tower" type="Node3D"]
 
 [node name="Ground" type="StaticBody3D" parent="."]
-transform = Transform3D(20, 0, 0, 0, 2, 0, 0, 0, 20, 0, 0, 0)
 
 [node name="TestFloor" type="MeshInstance3D" parent="Ground"]
-mesh = SubResource("BoxMesh_lb3ev")
+mesh = SubResource("BoxMesh_oj38g")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
-shape = SubResource("BoxShape3D_s42n5")
+shape = SubResource("BoxShape3D_mrlt4")
 
-[node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.6, 3.5)
-slide_on_ceiling = false
-script = ExtResource("3_r1dii")
+[node name="Player" parent="." instance=ExtResource("2_xm2ht")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.72968, -97.9656, 3.14924)
 
-[node name="Pivot" type="Node3D" parent="Player"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(0.6, 0, 0, 0, 0.3, 0, 0, 0, 0.6, 0, 0, 0)
-shape = SubResource("CylinderShape3D_hw5gi")
-
-[node name="Sprite3D" type="Sprite3D" parent="Player"]
-pixel_size = 0.02
-billboard = 1
-texture_filter = 0
-texture = ExtResource("4_bahj5")
-
-[node name="Weapon" type="Node3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.364, 0.15, 0.05)
-
-[node name="Sprite3D" type="Sprite3D" parent="Player/Weapon"]
-billboard = 1
-texture_filter = 0
-texture = ExtResource("5_xe5kv")
-
-[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("targetNode")]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.392626, 2.53083, 5.51121)
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906307, 0, -0.906307, 0.422618, 3, 2, 0)
+fov = 85.0
 script = ExtResource("6_jc1cb")
-targetNode = NodePath("")
+y = 6.0
+z = 3.0
 
 [node name="Enemy" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.6, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.99305, 1.6, 0)
 
 [node name="Sprite3D" type="Sprite3D" parent="Enemy"]
 pixel_size = 0.02
@@ -79,11 +60,11 @@ texture_filter = 0
 texture = ExtResource("7_pyv8f")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy"]
-transform = Transform3D(0.6, 0, 0, 0, 0.3, 0, 0, 0, 0.6, 0, 0, 0)
+transform = Transform3D(0.6, 0, 0, 0, 0.3, 0, 0, 0, 0.6, 2.5287, 0, 0)
 shape = SubResource("CylinderShape3D_qef5k")
 
 [node name="Left Wall WIP" type="StaticBody3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 20, 0, 0, 0, 20, -11, 11, 0)
+transform = Transform3D(2, 0, 0, 0, 20, 0, 0, 0, 20, -100, 11, 0)
 
 [node name="TestFloor" type="MeshInstance3D" parent="Left Wall WIP"]
 mesh = SubResource("BoxMesh_4q2ug")
@@ -93,7 +74,7 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_s42n5")
 
 [node name="Back Wall WIP" type="StaticBody3D" parent="."]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 2, 0, 11, -11)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 2, 0, 11, -100)
 
 [node name="TestFloor" type="MeshInstance3D" parent="Back Wall WIP"]
 mesh = SubResource("BoxMesh_4q2ug")
@@ -103,21 +84,31 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_s42n5")
 
 [node name="Front Wall WIP" type="StaticBody3D" parent="."]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 2, 0, 11, 11)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 2, 0, 11, 100)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Front Wall WIP"]
 shape = SubResource("BoxShape3D_s42n5")
 
-[node name="Right Wall WIP" type="StaticBody3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 20, 0, 0, 0, 20, 11, 11, 0)
-
-[node name="TestFloor" type="MeshInstance3D" parent="Right Wall WIP"]
-mesh = SubResource("BoxMesh_hkmvt")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Right Wall WIP"]
-shape = SubResource("BoxShape3D_s42n5")
-
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.178228, 8.87552, 6.15653)
+light_energy = 5.0
 omni_range = 30.0
+
+[node name="scene" parent="." instance=ExtResource("7_nb5u6")]
+transform = Transform3D(-3.0598e-07, 7, 3.0598e-07, 0, -3.0598e-07, 7, 7, 3.0598e-07, 1.33748e-14, -5.66888, 1.56694, 0.186004)
+
+[node name="food_truck_exterior" parent="." instance=ExtResource("6_kxmsq")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, 1, 0, 4.37114e-08, -12.6485, 0.5, 8.04894)
+
+[node name="Node" type="Node" parent="food_truck_exterior"]
+
+[node name="Exit" type="Node3D" parent="food_truck_exterior/Node"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, 1, 0, 4.37114e-08, -8.57111, 1.94446, 8.04894)
+
+[node name="Door" parent="." node_paths=PackedStringArray("player", "destination") instance=ExtResource("7_251ef")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.75264, -98.4837, 0.528371)
+player = NodePath("../Player")
+destination = NodePath("../food_truck_exterior/Node/Exit")
+
+[node name="food_truck" parent="." instance=ExtResource("8_cm5eh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100, 0)

@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjc8o8enjkphq"]
+
+[ext_resource type="Script" path="res://scripts/control_utils/teleporter.cs" id="1_kbe4b"]
+[ext_resource type="Texture2D" uid="uid://bwokxhenkfk0e" path="res://sprites/Wood floor.png" id="2_3xrhs"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ouvsu"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dnbgb"]
+albedo_texture = ExtResource("2_3xrhs")
+uv1_scale = Vector3(6.97, 6.97, 6.97)
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_l3w1u"]
+material = SubResource("StandardMaterial3D_dnbgb")
+size = Vector3(0.25, 2, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gxw6j"]
+size = Vector3(1, 1.5, 1.5)
+
+[node name="Door" type="Node3D" node_paths=PackedStringArray("collisionArea")]
+script = ExtResource("1_kbe4b")
+collisionArea = NodePath("Area3D")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_ouvsu")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="TestFloor" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_l3w1u")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_gxw6j")
