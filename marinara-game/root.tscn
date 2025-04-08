@@ -67,6 +67,7 @@ autowrap_mode = 0
 script = SubResource("CSharpScript_8q06p")
 
 [node name="TestLevel" parent="." instance=ExtResource("2_fusyx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1, 1)
 
 [node name="nodemap" parent="." instance=ExtResource("4_cqcdd")]
 visible = false

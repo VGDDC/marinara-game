@@ -8,6 +8,7 @@ public partial class inventory : Node3D
 	List<ingredient> subIngList;
 	List<Weapon> weaponList;
 	public int goldCarrots, maxGoldCarr;
+	
 	public RichTextLabel txtLbl;
 	public bool isFull; // bool to check if weapon list is full
 	public override void _Ready()
@@ -16,6 +17,8 @@ public partial class inventory : Node3D
 		subIngList = new List<ingredient>();
 		weaponList = new List<Weapon>();
 		goldCarrots = 0; maxGoldCarr = 100000;
+		txtLbl = new RichTextLabel();
+		txtLbl = (RichTextLabel) GetChild(0).GetChild(1);
 	}
 	public int getCarrots() { return goldCarrots; } // methods for gold carrots (money)
 	public void setCarrots(int i) { 
@@ -28,7 +31,7 @@ public partial class inventory : Node3D
 	}  
 	void updateCounter()
 	{
-		txtLbl.Text = "AGGGG Golden Carrots: " + goldCarrots + "/" + maxGoldCarr;
+		txtLbl.Text = "Golden Carrots: " + goldCarrots + "/" + maxGoldCarr;
 	}
 	public bool addWeapon(Weapon wep) // add weapon to list, return false if already has 4 weapons
 	{
