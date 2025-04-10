@@ -66,6 +66,7 @@ texture = ExtResource("4_82glr")
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("targetNode")]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.392626, 2.53083, 5.51121)
+fov = 90.0
 script = ExtResource("5_l5gto")
 targetNode = NodePath("../Player")
 
