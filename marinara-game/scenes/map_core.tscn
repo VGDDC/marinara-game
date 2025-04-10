@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cug16bnc880xh"]
+[gd_scene load_steps=15 format=3 uid="uid://cug16bnc880xh"]
 
 [ext_resource type="Texture2D" uid="uid://bwokxhenkfk0e" path="res://sprites/Wood floor.png" id="1_oqi10"]
 [ext_resource type="Script" path="res://scripts/Player.cs" id="2_msurb"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://403hwlngvsuj" path="res://sprites/player_character/temp_weapon.png" id="4_82glr"]
 [ext_resource type="Script" path="res://scripts/CameraMove.cs" id="5_l5gto"]
 [ext_resource type="Texture2D" uid="uid://pbqgyyusjo3g" path="res://sprites/enemy_character/enemy_sprite.png" id="5_prm6p"]
+[ext_resource type="Script" path="res://scripts/Enemy.cs" id="6_mf18g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c2pq8"]
 albedo_texture = ExtResource("1_oqi10")
@@ -68,11 +69,12 @@ texture = ExtResource("4_82glr")
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.392626, 2.53083, 5.51121)
 script = ExtResource("5_l5gto")
 targetNode = NodePath("../Player")
-y = 5.0
-z = 5.0
+y = 6.0
+z = 3.0
 
 [node name="Enemy" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.6, 0)
+script = ExtResource("6_mf18g")
 
 [node name="Sprite3D" type="Sprite3D" parent="Enemy"]
 pixel_size = 0.02
